@@ -3,10 +3,10 @@ import { Producto } from "./producto";
 export const PRODUCTOS:Producto[]=[
 
     {
-        titulo:"1 Lt Leche",
-        descripcion: "Leche San Marcos de 1 Lt",
+        titulo:"1 L Milk",
+        descripcion: "1 L of Milk San Marcos",
         imagen:"assets/Litrodeleche.jpg",
-        precio:15,
+        precio:1,
 
     },
 

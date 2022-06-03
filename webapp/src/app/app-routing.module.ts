@@ -24,8 +24,10 @@ const routes: Routes = [
 {path: 'signup', component: SignupComponent},
 
 
-{path: 'producto/:id', component: VerUnProductoComponent},
+{path: 'product:id', component: VerUnProductoComponent},
 
+
+{path: '**', pathMatch: 'full', redirectTo: 'home'}
 
 ];
 
