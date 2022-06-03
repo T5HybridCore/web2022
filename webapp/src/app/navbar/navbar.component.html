@@ -1,13 +1,20 @@
-<nav class="navbar navbar-expand-lg " style=" background-color: #e3f2fd;  ">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+    <!--  style=" background-color: #e3f2fd; " -->
     <div class="container-fluid ">
-        <a class="navbar-brand" href="#" [routerLink]="['/home']">
-            <img src="https://i.ibb.co/XLYbGNT/logo.png" alt="" width="30" height="35.27" class="d-inline-block align-text-top"> Super-Duper
+        <a class="navbar-brand d-none d-lg-block " href="#" [routerLink]="['/home']">
+            <img src="https://i.ibb.co/XLYbGNT/logo.png" alt="logo" width="35" height="42" class="d-inline-block align-text-top">
+            <p style="display:inline" class="">Super-Duper</p>
+        </a>
+        <a class="navbar-brand d-lg-none" href="#" [routerLink]="['/home']">
+            <img src="https://i.ibb.co/XLYbGNT/logo.png" alt="logo" width="30" height="35.27" class="d-inline-block align-text-top">
+
         </a>
 
-        <button class="navbar-toggler " type="button " data-bs-toggle="collapse " data-bs-target="#navbarSupportedContent " aria-controls="navbarSupportedContent " aria-expanded="false " aria-label="Toggle navigation ">
-        <span class="navbar-toggler-icon "></span>
+
+        <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation ">
+        <span class="navbar-toggler-icon"></span>
       </button>
-        <div class="collapse navbar-collapse " id="navbarSupportedContent ">
+        <div class="collapse navbar-collapse order-3 order-lg-2" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -46,12 +53,17 @@
             </ul>
             <form class="d-flex d-inline w-100" role="search ">
                 <input class="form-control " type="search " placeholder="Search product " aria-label="Search ">
-                <button class="btn  " type="submit "><img src="https://i.ibb.co/KyzsDmC/search.png" alt="" width="20"></button>
+                <button class="btn  " type="submit "><img src="https://i.ibb.co/KyzsDmC/search.png" alt="" width="25"></button>
             </form>
-            <a class="navbar-brand" href="#" [routerLink]="['/mycart'] " >
-                <img src="https://i.ibb.co/FwZCFZq/carrito.png" alt="" width="35" height="33" class="d-inline-block">
-            </a>
+
 
         </div>
+
+        <div class="d-flex flex-row order-2 order-lg-3">
+            <a class="navbar-brand" href="#" [routerLink]="['/mycart'] ">
+                <img src="https://i.ibb.co/FwZCFZq/carrito.png" alt="" width="40" height="33" class="d-inline-block">
+            </a>
+        </div>
     </div>
+
 </nav>
