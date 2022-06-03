@@ -16,6 +16,10 @@
     font-weight: bold;
 }
 
+.dropdown-item {
+    text-align: center;
+}
+
 .navbar-brand {
     font-weight: bold;
 }
