@@ -32,6 +32,7 @@ class FirebaseMethods {
         return list.length ? list : null;
     }
 
+    // Get by id
     async getById(collection, id) {
         const result = await this.db.collection(collection).doc(id).get();
         if (!result.exists) return null;  // Record not found
