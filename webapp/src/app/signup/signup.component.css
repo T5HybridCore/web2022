@@ -1,0 +1,120 @@
+/* Fonts Form Google Font ::- https://fonts.google.com/  -:: */
+@import url("https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Alegreya|Arima+Madurai|Dancing+Script|Dosis|Merriweather|Oleo+Script|Overlock|PT+Serif|Pacifico|Playball|Playfair+Display|Share|Unica+One|Vibur");
+/* End Fonts */
+/* Start Global rules */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: linear-gradient(-225deg, #e3fdf5 0%, #ffe6fa 100%);
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+  font-family: "Vibur", cursive;
+  font-family: "Abel", sans-serif;
+  opacity: 0.95;
+}
+
+p {
+  letter-spacing: 0.05em;
+}
+
+form {
+  width: 450px;
+  min-height: 500px;
+  height: auto;
+  border-radius: 5px;
+  margin: 2% auto;
+  box-shadow: 0 9px 50px #FAD4D4;
+  padding: 2%;
+  background-image: linear-gradient(-225deg, #e3fdf5 50%, #ffe6fa 50%);
+}
+
+form .con {
+  display: -webkit-flex;
+  display: flex;
+
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  text-align: center;
+  margin: 0 auto;
+}
+
+header {
+  margin: 2% auto 10% auto;
+  text-align: center;
+}
+
+header h2 {
+  font-size: 250%;
+  font-family: "Playfair Display", serif;
+  color: #3e403f;
+}
+
+input[id="txt-input"] {
+  width: 250px;
+  height: 30px;
+  margin-top: 5%;
+  border-style: hidden;
+  border-radius: 5px;
+}
+
+input:focus {
+  transform: translateX(-2px);
+  border-radius: 5px;
+}
+
+input[type="text"] {
+  min-width: 250px;
+}
+
+button {
+  display: inline-block;
+  color: #252537;
+
+  width: 280px;
+  height: 50px;
+
+  padding: 0 20px;
+  background: #fff;
+  border-radius: 5px;
+
+  outline: none;
+  border: none;
+
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s linear;
+
+  margin: 7% auto;
+  letter-spacing: 0.05em;
+
+  font-weight: bolder;
+  background-image: linear-gradient(-225deg, #e3fdf5 0%, #ffe6fa 100%);
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+}
+
+button:hover {
+  transform: translatey(3px);
+  box-shadow: none;
+  /*font-weight: bolder;*/
+}
+
+button:hover {
+  animation: ani9 0.4s ease-in-out infinite alternate;
+}
+@keyframes ani9 {
+  0% {
+    transform: translateY(3px);
+  }
+  100% {
+    transform: translateY(5px);
+  }
+}
