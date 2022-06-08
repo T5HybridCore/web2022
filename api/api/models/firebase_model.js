@@ -20,6 +20,9 @@ class FirebaseModel {
     getProduct(id) { return firebase_methods.getById(this.productCollection, id); }
     addProduct(product) { return firebase_methods.post(this.productCollection, product); }
 
+    // Search
+    searchProducts(term) { return firebase_methods.search(this.productCollection, term) }
+
     //getById(id) { return firebase.getById(this.collection, id) }
 
     //add(book) { return firebase.post(this.collection, book) }

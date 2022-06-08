@@ -73,6 +73,23 @@ class FirebaseMethods {
 
         return { id };
     }
+
+    // Search
+    async search(collection, term) {
+        const result = await this.db.collection(collection).get();
+
+        const list = [];
+        result.forEach((doc) => {
+            const data = doc.data();
+
+            if (data.Title.toLowerCase().includes(term.toLowerCase())) {
+                data.id = doc.id;
+                list.push(data);
+            }
+        });
+
+        return list.length ? list : null;
+    }
 }
 
 module.exports = new FirebaseMethods();

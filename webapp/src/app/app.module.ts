@@ -18,6 +18,7 @@ import { VerUnProductoComponent } from './ver-un-producto/ver-un-producto.compon
 import { FaqComponent } from './faq/faq.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { LoadingComponent } from './loading/loading.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { LoadingComponent } from './loading/loading.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

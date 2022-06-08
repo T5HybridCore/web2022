@@ -1,4 +1,5 @@
 const express = require('express');
+const url = require('url');
 const router = express.Router();
 const firebaseModel = require('../models/firebase_model');
 
@@ -33,6 +34,19 @@ router.post('/product/', async (req, res, next) => {
         return res.status(201).json(result);
     }
     catch (e) {
+        return next(e);
+    }
+});
+
+// Search
+router.get('/search', async (req, res, next) => {
+    try {
+        const params = url.parse(req.url, true).query;
+
+        const result = await firebaseModel.searchProducts(params.q);
+        if (!result) return res.sendStatus(404);
+        return res.json(result);
+    } catch (e) {
         return next(e);
     }
 });

@@ -22,23 +22,19 @@ export class ApiService {
 
   // Products
   getAllProducts() {
-    return this.getQuery(`product`);    
+    return this.getQuery(`product`);
   }
 
   getProduct(id: string) {
-    return this.getQuery(`product/${id}`);    
+    return this.getQuery(`product/${id}`);
   }
 
   addProduct() {
     //
   }
 
-  getProducts_by_name(word: string){ 
-    console.log(word);
-    return this.getQuery(`search?q=${word}&type=product&limit=6`) 
-    .pipe( map ( (data:any) => (data.products.items 
-      ))); }
-
-
-
+  getProducts_by_name(search: string) {
+    console.log(search);
+    return this.getQuery(`search?q=${search}&type=product`);
+  }
 }
