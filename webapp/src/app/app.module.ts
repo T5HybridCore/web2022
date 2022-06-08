@@ -15,6 +15,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { SignupComponent } from './signup/signup.component';
 import { VerUnProductoComponent } from './ver-un-producto/ver-un-producto.component';
+import { FaqComponent } from './faq/faq.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { VerUnProductoComponent } from './ver-un-producto/ver-un-producto.compon
     AboutComponent,
     ContactComponent,
     SignupComponent,
-    VerUnProductoComponent
+    VerUnProductoComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,

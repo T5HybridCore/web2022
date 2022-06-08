@@ -9,6 +9,7 @@ import { AboutComponent } from './about/about.component';
 import { SearchComponent } from './search/search.component';
 import { ContactComponent } from './contact/contact.component';
 import { SignupComponent } from './signup/signup.component';
+import { FaqComponent } from './faq/faq.component';
 import { VerUnProductoComponent } from './ver-un-producto/ver-un-producto.component';
 
 
@@ -22,6 +23,7 @@ const routes: Routes = [
 {path: 'search', component: SearchComponent},
 {path: 'contact', component: ContactComponent},
 {path: 'signup', component: SignupComponent},
+{path: 'faq', component: FaqComponent},
 
 
 {path: 'product:id', component: VerUnProductoComponent},
