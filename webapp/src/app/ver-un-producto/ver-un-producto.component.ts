@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Producto } from '../producto';
 import { ProductoService } from '../shared/producto.service';
+import { ApiService } from '../shared/services/api.service';
 
 @Component({
   selector: 'app-ver-un-producto',
@@ -11,18 +12,30 @@ import { ProductoService } from '../shared/producto.service';
 })
 export class VerUnProductoComponent implements OnInit {
 
-  @Input() producto!:Producto;
+  product: any = {};
+  loadingProduct: boolean;
   
-  constructor(public productoService:ProductoService, public activatedRoute: ActivatedRoute) {
+  constructor(private router: ActivatedRoute, private api: ApiService) {
 
-    this.activatedRoute.params.subscribe(params =>{
-      this.producto=productoService.getUnProducto(params['id']);
-      
-    })
-
-   }
-
-  ngOnInit(): void {
+    this.loadingProduct = true;
+    this.router.params.subscribe(params => {
+      this.getProduct(params['id']);
+    
+      console.log("llego" + params['id']);
+    });
   }
 
+  ngOnInit(): void { }
+
+  getProduct(id: string) {
+
+    this.loadingProduct = true;
+    this.api.getProduct(id).subscribe(product => {
+      console.log(product);
+      this.product = product; this.loadingProduct = false;
+
+    });
+  }
+
+  
 }

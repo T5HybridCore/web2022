@@ -27,7 +27,7 @@ const routes: Routes = [
 
 
 {path: 'product:id', component: VerUnProductoComponent},
-
+{path: 'product/:id', component: VerUnProductoComponent},
 
 {path: '**', pathMatch: 'full', redirectTo: 'home'}
 

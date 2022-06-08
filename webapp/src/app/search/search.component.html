@@ -1,1 +1,7 @@
-<p>search works!</p>
+<div class="row m-5" >
+    <div class="col"> 
+        <input #word type="text" (keyup)="search(word.value)" class="form-control" placeholder="Search Product..."> 
+    </div> 
+</div>
+     <app-loading *ngIf="this.flag"></app-loading> 
+     <app-product-card *ngIf="!this.flag" [items]="this.products"></app-product-card>

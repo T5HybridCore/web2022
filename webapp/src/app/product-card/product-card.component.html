@@ -1,0 +1,13 @@
+<div class="card-columns m-5 animated fadeIn">
+    <ng-container *ngFor="let item of items"> 
+        <div (click)="seeProduct( item )" class="card puntero" *ngIf="showCard(item)"> 
+            <!-- <app-picture width="100%" paddingTop="66%" [src]="item.images[0].url"></app-picture> -->
+            <div class="card-body">
+                <h5 class="card-title">Producto: {{item.name}} </h5>
+                <p class="card-text"> 
+                    <span *ngFor="let product of item.product" class="badge badge-primary"> {{product.Title}} </span> 
+                </p>
+            </div> 
+        </div>
+    </ng-container> 
+</div>

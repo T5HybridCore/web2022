@@ -17,10 +17,10 @@ export class ProductoService {
     return this.productos[posicion];
   }
 
-  searchUnProducto(nomproducto:string):number{
+/*   searchUnProducto(nomproducto:string):number{
     let index = this.productos.findIndex(p=> p.titulo === nomproducto);
     return index;
-  }
+  } */
 
   getProductos():Producto[]{
     return this.productos;

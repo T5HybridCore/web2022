@@ -16,6 +16,8 @@ import { ContactComponent } from './contact/contact.component';
 import { SignupComponent } from './signup/signup.component';
 import { VerUnProductoComponent } from './ver-un-producto/ver-un-producto.component';
 import { FaqComponent } from './faq/faq.component';
+import { ProductCardComponent } from './product-card/product-card.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { FaqComponent } from './faq/faq.component';
     ContactComponent,
     SignupComponent,
     VerUnProductoComponent,
-    FaqComponent
+    FaqComponent,
+    ProductCardComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
