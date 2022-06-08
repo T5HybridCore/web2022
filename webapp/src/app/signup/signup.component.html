@@ -1,1 +1,197 @@
-<p>signup works!</p>
+<div>
+  <form
+    [formGroup]="forma"
+    (ngSubmit)="saveChanges()"
+    class="needs-validation"
+    novalidate
+  >
+    <div *ngIf="band == false" class="con">
+      <header class="head-form">
+        <h2>Sign Up</h2>
+      </header>
+      <div class="field-set">
+        <input
+          [ngClass]="{
+            'is-invalid':
+              !forma.get('name')?.valid && forma.controls['name'].dirty
+          }"
+          class="form-input"
+          id="txt-input"
+          type="text"
+          formControlName="name"
+          placeholder="Name"
+          required
+        />
+        <div
+          *ngIf="forma.controls['name'].errors?.['required']"
+          class="invalid-feedback"
+        >
+          <p>The name is required</p>
+        </div>
+        <div
+          *ngIf="forma.controls['name'].errors?.['pattern']"
+          class="invalid-feedback"
+        >
+          <p>
+            Name is not in the correct format<br />
+            •only letters and spaces
+          </p>
+        </div>
+        <input
+          [ngClass]="{
+            'is-invalid':
+              !forma.get('lastname')?.valid && forma.controls['lastname'].dirty
+          }"
+          class="form-input"
+          type="text"
+          placeholder="Lastname"
+          formControlName="lastname"
+          id="txt-input"
+          required
+        />
+        <div
+          *ngIf="forma.controls['lastname'].errors?.['required']"
+          class="invalid-feedback"
+        >
+          <p>Last name is required</p>
+        </div>
+        <div
+          *ngIf="forma.controls['lastname'].errors?.['pattern']"
+          class="invalid-feedback"
+        >
+          <p>
+            Name is not in the correct format<br />
+            •only letters and spaces
+          </p>
+        </div>
+        <input
+          [ngClass]="{
+            'is-invalid':
+              !forma.get('mail')?.valid && forma.controls['mail'].dirty
+          }"
+          class="form-input"
+          type="text"
+          placeholder="Email"
+          formControlName="mail"
+          id="txt-input"
+          required
+        />
+        <div
+          *ngIf="forma.controls['mail'].errors?.['required']"
+          class="invalid-feedback"
+        >
+          <p>Email is required</p>
+        </div>
+        <div
+          *ngIf="forma.controls['mail'].errors?.['email']"
+          class="invalid-feedback"
+        >
+          <p>The email is not in the correct format</p>
+        </div>
+        <input
+          [ngClass]="{
+            'is-invalid':
+              !forma.get('account')?.valid && forma.controls['account'].dirty
+          }"
+          class="form-input"
+          type="text"
+          placeholder="Account"
+          formControlName="account"
+          id="txt-input"
+          required
+        />
+        <div
+          *ngIf="forma.controls['account'].errors?.['required']"
+          class="invalid-feedback"
+        >
+          <p>The account is required</p>
+        </div>
+        <div
+          *ngIf="forma.controls['account'].errors?.['pattern']"
+          class="invalid-feedback"
+        >
+          <p>
+            Account is not in the correct format<br />
+            Characters allowed: $!%*#?&._-
+          </p>
+        </div>
+        <input
+          [ngClass]="{
+            'is-invalid':
+              !forma.get('password')?.valid && forma.controls['password'].dirty
+          }"
+          class="form-input"
+          type="password"
+          placeholder="Password"
+          name="password"
+          formControlName="password"
+          id="txt-input"
+          required
+        />
+        <div
+          *ngIf="forma.controls['password'].errors?.['required']"
+          class="invalid-feedback"
+        >
+          <p>Password is required</p>
+        </div>
+        <div
+          *ngIf="forma.controls['password'].errors?.['pattern']"
+          class="invalid-feedback"
+        >
+          <p>
+            Password is not in the correct format<br />
+            •At least 8 characters............<br />
+            •At least 1 numeric character<br />
+            •At least 1 lowercase letter.....<br />
+            •At least 1 uppercase letter.....
+          </p>
+        </div>
+        <input
+          [ngClass]="{
+            'is-invalid':
+              !forma.get('password2')?.valid &&
+              forma.controls['password2'].dirty
+          }"
+          class="form-input"
+          type="password"
+          placeholder="Confirm Password"
+          formControlName="password2"
+          id="txt-input"
+          required
+        />
+        <div
+          *ngIf="forma.controls['password2'].errors?.['required']"
+          class="invalid-feedback"
+        >
+          <p>Password is required</p>
+        </div>
+        <div
+          *ngIf="forma.controls['password2'].errors?.['pattern']"
+          class="invalid-feedback"
+        >
+          <p>
+            Password is not in the correct format<br />
+            •At least 8 characters............<br />
+            •At least 1 numeric character<br />
+            •At least 1 lowercase letter.....<br />
+            •At least 1 uppercase letter.....
+          </p>
+        </div>
+        <button class="log-in" type="submit" [disabled]="forma.invalid">
+          Sign Up
+        </button>
+      </div>
+    </div>
+    <div *ngIf="band == true">
+      <div class="con">
+        <header class="head-form">
+          <h2>you have Sign Up Successfully</h2>
+        </header>
+        <div class="field-set">
+          <button class="log-in" [routerLink]="['/fruits']">Home</button>
+          <button class="log-in" [routerLink]="['/vegetables']">Sign In</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
