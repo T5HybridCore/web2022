@@ -1,0 +1,33 @@
+img.bg{
+   
+    padding: 0% 0% 0% 3%;
+    min-height: 100vh;
+    height: 100%;
+    width: 120%;
+    position: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    top: 0;
+    left: -100px;
+    opacity: .3;
+    z-index: 1;
+}
+
+.contenedor{
+    background-color: white;
+    padding: 2%; 
+    position: relative;
+     z-index: 9;
+
+}
+
+.fondo_verproducto{
+    
+    background-size: 100% 100%;
+    padding: 3%;
+    text-align: center;
+    
+
+}

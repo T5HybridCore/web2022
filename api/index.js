@@ -5,7 +5,7 @@ const compression = require('compression');
 const router = require('./api/controllers/firebase_controllers');
 
 // API Port
-const port = process.env.PORT || 5050;
+const port = process.env.PORT || 3050;
 
 // App
 const app = express();
