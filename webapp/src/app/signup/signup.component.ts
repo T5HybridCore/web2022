@@ -10,6 +10,7 @@ export class SignupComponent implements OnInit {
 
   forma!: FormGroup;
   band=false;
+  
   constructor() { 
     this.forma = new FormGroup({
       'name': new FormControl('',Validators.pattern("^[A-Za-z ]{3,40}$")),
@@ -18,9 +19,7 @@ export class SignupComponent implements OnInit {
       'account': new FormControl('',Validators.pattern("^[A-Za-z0-9 $!%*#?&._-]{3,40}$")),
       'password': new FormControl('',Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$")),
       'password2': new FormControl('',Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$"))
-      
       });
-      
   }
 
   ngOnInit(): void {
@@ -31,6 +30,4 @@ export class SignupComponent implements OnInit {
     console.log(this.forma);
     console.log(this.forma.value);
     }
-    
-
 }
