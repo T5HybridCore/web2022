@@ -1,13 +1,40 @@
-<div class="card-columns m-5 animated fadeIn">
-    <ng-container *ngFor="let item of items"> 
-        <div (click)="seeProduct( item )" class="card puntero" *ngIf="showCard(item)"> 
+
+<div class="card-deck">
+
+    <div class="card">
+
+      <ng-container *ngFor="let item of items"> 
+        <img class="card-img-top" src={{item.ImageUrl}}   alt="Card image cap">
+        
+        <div class="card-body">
+          <div (click)="seeProduct( item )" class="card puntero" *ngIf="showCard(item)"> 
             <!-- <app-picture width="100%" paddingTop="66%" [src]="item.images[0].url"></app-picture> -->
             <div class="card-body">
-                <h5 class="card-title">Producto: {{item.name}} </h5>
-                <p class="card-text"> 
-                    <span *ngFor="let product of item.product" class="badge badge-primary"> {{product.Title}} </span> 
+              <h5 class="card-title">Product: {{item.Title}} </h5>
+                <h2 class="card-title"></h2>
+                <p class="card-text">
+                  Category: {{item.Category }} <br>
+                  Price: {{item.Price}}  <br>
+                  Id: {{item.Id}}  <br>
                 </p>
+                <div class="card-footer">
+                  <small class="text-muted"><input type="button" value="See iten"></small>
+                </div>
+
+              
             </div> 
         </div>
+         
+          
+        </div>
+
+        
+
     </ng-container> 
-</div>
+
+     
+      
+     
+    </div>
+    
+  </div>

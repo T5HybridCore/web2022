@@ -18,19 +18,21 @@ export class VerUnProductoComponent implements OnInit {
   constructor(private router: ActivatedRoute, private api: ApiService) {
 
     this.loadingProduct = true;
+    console.log("dentro de ver producto CONSTRUCTOR ");
     this.router.params.subscribe(params => {
       this.getProduct(params['id']);
     
-      console.log("llego" + params['id']);
+      console.log("llego " + params['id']);
     });
   }
 
   ngOnInit(): void { }
 
   getProduct(id: string) {
-
+    console.log("dentro de ver producto GETPRODUCT");
     this.loadingProduct = true;
     this.api.getProduct(id).subscribe(product => {
+      console.log("ver producto PRODUCT = "+ product);
       console.log(product);
       this.product = product; this.loadingProduct = false;
 

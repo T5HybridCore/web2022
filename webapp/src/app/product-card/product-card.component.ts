@@ -17,20 +17,24 @@ export class ProductCardComponent implements OnInit {
 
   seeProduct(item: any) {
 
-    console.log("method seeProduct of card component");
+    console.log("method seeProduct");
     let productId;
-
-    if (item.type === 'product') {
+    productId = item.Title;
+    /* if (item.type === 'product') {
+      console.log("method seeProduct inside if");
       productId = item.id;
     } else { 
+      console.log("method seeProduct inside else");
       productId = item.products[0].id; 
-    }
+    } */
+    console.log("productId == " + productId);
      this.router.navigate(['/product', productId]);
   }
 
   showCard(item:any){
     console.log("method showcard of card component");
-     return item && item.images && item.images.length > 0 
+    console.log(item);
+     return item; 
     }
 
 }
