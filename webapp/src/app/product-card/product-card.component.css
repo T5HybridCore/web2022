@@ -1,0 +1,23 @@
+.card-img-top{    
+    max-height: 180px;
+    width: 100%;    
+}
+
+.card-deck{    
+    
+    text-align: center;     
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 30px;
+}
+
+.card{
+    background-color:rgb(235, 227, 212); 
+}
+
+.card-body{
+    background-color: skyblue;
+    color: black;
+}
+
+
