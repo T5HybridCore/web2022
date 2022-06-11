@@ -19,15 +19,8 @@ export class ProductCardComponent implements OnInit {
 
     console.log("method seeProduct");
     let productId;
-    productId = item.Title;
-    /* if (item.type === 'product') {
-      console.log("method seeProduct inside if");
-      productId = item.id;
-    } else { 
-      console.log("method seeProduct inside else");
-      productId = item.products[0].id; 
-    } */
-    console.log("productId == " + productId);
+    productId = item.id;
+      console.log("productId == " + productId);
      this.router.navigate(['/product', productId]);
   }
 

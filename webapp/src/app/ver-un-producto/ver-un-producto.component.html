@@ -1,24 +1,25 @@
 <app-loading *ngIf="loadingProduct"></app-loading> 
 <div class="row animated fadeIn" *ngIf="!loadingProduct">
-     <div class="col-2">
-          <img class="img-thumbnail img-circle" [src]="this.product.images" alt=""> </div>
-           <div class="col"> <h3> Artista: {{product.Title}} </h3>
-             <p> <a [href]="product.external_urls.spotify" class="text-warning" target="_blank"> Ir a la pagina del artista </a> </p> 
-            </div> </div> <div class="row m-5"> <div class="col"> 
-                <table class="table"> <thead> <tr class="text-black"> 
-                    <th >Foto</th> <th>Album</th>
-                     <th>Cancion</th> <th>Vista Previa</th> </tr> </thead> 
-                     <tbody class="text-black"> 
-                         <!-- <tr *ngFor="let track of topTracks"> 
-                             <td>
-                              <app-picture maxWidth="100px" minWidth="100px" width="100%" paddingTop="100%" [src]="track.album.images[0].url"></app-picture> 
-                            </td>
-                             <td> {{ track.album.name }} </td> 
-                            <td> {{ track.name }} </td> <td> 
-                                <iframe [src]="track.id | domseguro:'https://open.spotify.com/embed/track/'" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe> 
-                            </td>
-                         </tr>  -->
-                        </tbody> 
-                    </table>
-                 </div>
-                </div>
+
+  <div class="container">
+    <div class="card" style="width: 18rem;">
+        <img src={{product.ImageUrl}} class="card-img-top" alt="error">
+        <div class="card-body">
+          <h5 class="card-title">{{product.Title}}</h5>
+          <p class="card-text">{{product.Description}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Manufacturer: {{product.Manufacturer}}</li>
+          <li class="list-group-item">Category: {{product.Category}}</li>
+          <li class="list-group-item">Subcategory: {{product.SubCategory}}</li>
+          <li class="list-group-item">Contents: {{product.Contents}}</li>
+          <li class="list-group-item">Price: {{product.Price|currency}}</li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+    </div>
+  </div>
+
+</div>

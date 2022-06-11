@@ -34,7 +34,12 @@ export class VerUnProductoComponent implements OnInit {
     this.api.getProduct(id).subscribe(product => {
       console.log("ver producto PRODUCT = "+ product);
       console.log(product);
-      this.product = product; this.loadingProduct = false;
+      
+      this.product = product; 
+      console.log(this.product.Title );
+      console.log(this.product.Manufacturer );
+      console.log(this.product.Price );
+      this.loadingProduct = false;
 
     });
   }
