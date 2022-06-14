@@ -1,1 +1,38 @@
-<p>mycart works!</p>
+<div class="row animated fadeIn" *ngIf="!loadingCart">
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Remove</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <ng-container *ngFor="let item of cart">
+            <tr>
+              <th scope="row">{{ counter }}</th>
+              <td>{{ product.Title }}</td>
+              <td>{{ product.Price | currency }}</td>
+              <td>
+                <img
+                  src="{{ product.ImageUrl }}"
+                  class="card-img-top"
+                  alt="error"
+                />
+              </td>
+            </tr>
+          </ng-container>
+          <tr>
+            <th scope="row">$</th>
+            <td>Total</td>
+            <td [colSpan]="2">{{ accumulator | currency }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

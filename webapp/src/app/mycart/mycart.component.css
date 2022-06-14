@@ -1,0 +1,6 @@
+.container{
+    display: flex;
+    background-image: linear-gradient(15deg, #7fc8f3 0%, #f8f8f8 100%);
+    border-radius: 10%;
+   justify-content: center;
+}
