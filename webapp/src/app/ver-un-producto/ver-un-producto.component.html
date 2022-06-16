@@ -16,8 +16,9 @@
           <li class="list-group-item">Price: {{product.Price|currency}}</li>
         </ul>
         <div class="card-body">
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
+          <button (click)="addProduct_tocart_byid(amounts.value)" >Add To Cart</button>
+          <input #amounts type="number"  class="form-control" placeholder="0" min="0" max="1" required >
+          
         </div>
     </div>
   </div>
