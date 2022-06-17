@@ -4,16 +4,16 @@
        
     <div class="card">
       
-      <img class="card-img-top" src={{item.ImageUrl}}   alt="Card image cap">
+      <img class="card-img-top" src={{item.picture}}   alt="Card image cap">
       <div class="card-body">
 
         <div (click)="seeProduct( item )" class="cardpuntero" *ngIf="showCard(item)"> 
-          <p>Product: {{item.Title}} </p>
+          <p>Product: {{item.title}} </p>
         </div>  
         <div class="card-footer">
-          <small>            Category: {{item.Category }} <br>
-            Manufacturer: {{item.Manufacturer }} <br>            
-            <b> Price: {{item.Price |currency }} </b> <br>
+          <small>            Category: {{item.category }} <br>
+            Manufacturer: {{item.manufacturer }} <br>            
+            <b> Price: {{item.price |currency }} </b> <br>
           </small>
         </div>              
           

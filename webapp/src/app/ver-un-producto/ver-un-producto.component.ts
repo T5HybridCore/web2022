@@ -54,7 +54,7 @@ export class VerUnProductoComponent implements OnInit {
 
   //añadir productos al carrito
   addProduct_tocart_byid(amounts:string ) {
-    this.api.addProduct(this.product.id, amounts).subscribe((product) => {
+    /*this.api.addProduct(this.product.id, amounts).subscribe((product) => {
       console.log('ver producto PRODUCT = ' + product);
       console.log(product);
 
@@ -66,7 +66,7 @@ export class VerUnProductoComponent implements OnInit {
       console.log(this.product.Manufacturer);
       console.log(this.product.Price);
       this.loadingProduct = false;
-    });
+    });*/
 
     
   }

@@ -11,6 +11,7 @@ import { ContactComponent } from './contact/contact.component';
 import { SignupComponent } from './signup/signup.component';
 import { FaqComponent } from './faq/faq.component';
 import { VerUnProductoComponent } from './ver-un-producto/ver-un-producto.component';
+import { ProductsComponent } from './admin/products/products.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,9 @@ const routes: Routes = [
 
 {path: 'product:id', component: VerUnProductoComponent},
 {path: 'product/:id', component: VerUnProductoComponent},
+
+// Admin
+{path: 'admin/products', component: ProductsComponent},
 
 {path: '**', pathMatch: 'full', redirectTo: 'home'}
 

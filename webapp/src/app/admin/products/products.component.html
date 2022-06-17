@@ -1,0 +1,232 @@
+<div class="card-style mb-30">
+    <div class="d-flex">
+        <div class="flex-grow-1">
+            <h6 class="mb-10">All products ({{products?.length}})</h6>
+            <p class="text-sm mb-20">
+                List of all products
+            </p>
+        </div>
+        <div class="m-auto">
+            <button class="main-btn primary-btn btn-hover" (click)="openModal(null)">Add product</button>
+        </div>
+    </div>
+    <div class="table-wrapper table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <h6>Title</h6>
+                    </th>
+                    <th>
+                        <h6>Category</h6>
+                    </th>
+                    <th>
+                        <h6>Manufacturer</h6>
+                    </th>
+                    <th>
+                        <h6>Price</h6>
+                    </th>
+                    <th>
+                        <h6>Action</h6>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of products">
+                    <td class="min-width">
+                        <div class="lead">
+                            <div class="lead-image">
+                                <img src="{{product.picture}}" alt="">
+                            </div>
+                            <div class="lead-text">
+                                <p>{{product.title}}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="min-width">
+                        <p>{{product.category}}</p>
+                    </td>
+                    <td class="min-width">
+                        <p>{{product.manufacturer}}</p>
+                    </td>
+                    <td class="min-width">
+                        <p>{{product.price | currency}}</p>
+                    </td>
+                    <td>
+                        <div class="action">
+                            <button class="text-success" (click)="openPreviewModal(product)">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <button class="text-primary" (click)="openModal(product)">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button class="text-danger">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="productModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content card-style">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productModalTitle">{{isNew ? 'Add product' : 'Edit product'}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form" (ngSubmit)="closeModal()" class="needs-validation" novalidate>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="input-style-1">
+                                <label>Title</label>
+                                <input type="text" placeholder="title..." formControlName="title"
+                                    [ngClass]="{'is-invalid':!form.get('title')?.valid}">
+                                <div *ngIf="form.controls['title'].errors?.['required']" class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['title'].errors?.['minlength']" class="invalid-feedback">
+                                    * At least 3 characters
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="input-style-1">
+                                <label>Category</label>
+                                <input type="text" placeholder="category..." formControlName="category"
+                                    [ngClass]="{'is-invalid':!form.get('category')?.valid}">
+                                <div *ngIf="form.controls['category'].errors?.['required']" class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['category'].errors?.['minlength']" class="invalid-feedback">
+                                    * At least 3 characters
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="input-style-1">
+                                <label>Subcategory</label>
+                                <input type="text" placeholder="subcategory..." formControlName="subCategory"
+                                    [ngClass]="{'is-invalid':!form.get('subCategory')?.valid}">
+                                <div *ngIf="form.controls['subCategory'].errors?.['required']" class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['subCategory'].errors?.['minlength']"
+                                    class="invalid-feedback">
+                                    * At least 3 characters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="input-style-1">
+                                <label>Manufacturer</label>
+                                <input type="text" placeholder="manufacturer..." formControlName="manufacturer"
+                                    [ngClass]="{'is-invalid':!form.get('manufacturer')?.valid}">
+                                <div *ngIf="form.controls['manufacturer'].errors?.['required']"
+                                    class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['manufacturer'].errors?.['minlength']"
+                                    class="invalid-feedback">
+                                    * At least 3 characters
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-style-1">
+                                <label>Contents</label>
+                                <input type="text" placeholder="contents..." formControlName="contents"
+                                    [ngClass]="{'is-invalid':!form.get('contents')?.valid}">
+                                <div *ngIf="form.controls['contents'].errors?.['required']" class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['contents'].errors?.['minlength']" class="invalid-feedback">
+                                    * At least 3 characters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="input-style-1">
+                                <label>Price</label>
+                                <input type="text" placeholder="price..." formControlName="price"
+                                    [ngClass]="{'is-invalid':!form.get('price')?.valid}">
+                                <div *ngIf="form.controls['price'].errors?.['required']" class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['price'].errors?.['min']" class="invalid-feedback">
+                                    * Greater than 0
+                                </div>
+                                <div *ngIf="form.controls['price'].errors?.['pattern']" class="invalid-feedback">
+                                    * Only numbers
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="select-style-1">
+                                <label>Organic</label>
+                                <div class="select-position">
+                                    <select formControlName="organic"
+                                        [ngClass]="{'is-invalid':!form.get('organic')?.valid}">
+                                        <option value="">Select an option</option>
+                                        <option value="true">Yes</option>
+                                        <option value="false">No</option>
+                                    </select>
+                                    <div *ngIf="form.controls['organic'].errors?.['required']" class="invalid-feedback">
+                                        * Field required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-style-1">
+                                <label>Picture</label>
+                                <input type="text" placeholder="picture..." formControlName="picture"
+                                    [ngClass]="{'is-invalid':!form.get('picture')?.valid}">
+                                <div *ngIf="form.controls['picture'].errors?.['required']" class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['picture'].errors?.['minlength']" class="invalid-feedback">
+                                    * At least 3 characters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-style-1">
+                                <label>Description</label>
+                                <textarea placeholder="description..." rows="5" formControlName="description"
+                                    [ngClass]="{'is-invalid':!form.get('description')?.valid}"></textarea>
+                                <div *ngIf="form.controls['description'].errors?.['required']" class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['description'].errors?.['minlength']"
+                                    class="invalid-feedback">
+                                    * At least 3 characters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="action d-flex flex-wrap justify-content-end">
+                        <button type="submit" class="main-btn primary-btn square-btn btn-hover m-1"
+                            [disabled]="form.invalid">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

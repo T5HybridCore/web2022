@@ -3,17 +3,17 @@
 
   <div class="container">
     <div class="card" style="width: 18rem;">
-        <img src={{product.ImageUrl}} class="card-img-top" alt="error">
+        <img src={{product.picture}} class="card-img-top" alt="error">
         <div class="card-body">
-          <h5 class="card-title">{{product.Title}}</h5>
-          <p class="card-text">{{product.Description}}</p>
+          <h5 class="card-title">{{product.title}}</h5>
+          <p class="card-text">{{product.description}}</p>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Manufacturer: {{product.Manufacturer}}</li>
-          <li class="list-group-item">Category: {{product.Category}}</li>
-          <li class="list-group-item">Subcategory: {{product.SubCategory}}</li>
-          <li class="list-group-item">Contents: {{product.Contents}}</li>
-          <li class="list-group-item">Price: {{product.Price|currency}}</li>
+          <li class="list-group-item">Manufacturer: {{product.manufacturer}}</li>
+          <li class="list-group-item">Category: {{product.category}}</li>
+          <li class="list-group-item">SubCategory: {{product.subCategory}}</li>
+          <li class="list-group-item">Contents: {{product.contents}}</li>
+          <li class="list-group-item">Price: {{product.price | currency}}</li>
         </ul>
         <div class="card-body">
           <button (click)="addProduct_tocart_byid(amounts.value)" >Add To Cart</button>

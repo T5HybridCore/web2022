@@ -1,5 +1,16 @@
-<app-navbar></app-navbar>
-
-<div class="container mt-5">
-    <router-outlet> </router-outlet>    
+<div *ngIf="!isAdmin; else admin">
+    <app-navbar></app-navbar>
+    <div class="container mt-5">
+        <router-outlet (activate)="onActivated($event)"> </router-outlet>
+    </div>
 </div>
+
+<ng-template #admin>
+    <aside class="sidebar-nav-wrapper"></aside>
+    <main class="main-wrapper">
+        <div class="container-fluid">
+            <app-pagetitle [title]="title" [path]="url"></app-pagetitle>
+            <router-outlet></router-outlet>
+        </div>
+    </main>
+</ng-template>

@@ -82,7 +82,7 @@ class FirebaseMethods {
         result.forEach((doc) => {
             const data = doc.data();
 
-            if (data.Title.toLowerCase().includes(term.toLowerCase())) {
+            if (data.title.toLowerCase().includes(term.toLowerCase())) {
                 data.id = doc.id;
                 list.push(data);
             }

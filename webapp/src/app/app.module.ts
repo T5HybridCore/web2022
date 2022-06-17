@@ -19,6 +19,10 @@ import { FaqComponent } from './faq/faq.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { LoadingComponent } from './loading/loading.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ProductsComponent } from './admin/products/products.component';
+import { AnimationComponent } from './utils/animation/animation.component';
+import { SidebarComponent } from './admin/sidebar/sidebar.component';
+import { PagetitleComponent } from './admin/pagetitle/pagetitle.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,11 @@ import { HttpClientModule } from '@angular/common/http';
     VerUnProductoComponent,
     FaqComponent,
     ProductCardComponent,
-    LoadingComponent
+    LoadingComponent,
+    ProductsComponent,
+    AnimationComponent,
+    SidebarComponent,
+    PagetitleComponent
   ],
   imports: [
     BrowserModule,
