@@ -23,6 +23,7 @@ import { ProductsComponent } from './admin/products/products.component';
 import { AnimationComponent } from './utils/animation/animation.component';
 import { SidebarComponent } from './admin/sidebar/sidebar.component';
 import { PagetitleComponent } from './admin/pagetitle/pagetitle.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { PagetitleComponent } from './admin/pagetitle/pagetitle.component';
     AppRoutingModule,
     FormsModule, 
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    QRCodeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
