@@ -31,8 +31,8 @@ export class UsersComponent implements OnInit {
     this.form = new FormGroup({
       'uid': new FormControl('', [Validators.required]),
       'email': new FormControl('', [Validators.required, Validators.email]),
-      'phoneNumber': new FormControl('+52', [Validators.required, Validators.pattern("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$"), Validators.minLength(10), Validators.maxLength(13)]),
-      'password': new FormControl('', [Validators.required, Validators.minLength(8)]),
+      'phoneNumber': new FormControl('', [Validators.required, Validators.pattern("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$"), Validators.minLength(10), Validators.maxLength(10)]),
+      'password': new FormControl('', Validators.minLength(8)),
       'displayName': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'photoURL': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'disabled': new FormControl('', [Validators.required])
@@ -50,7 +50,7 @@ export class UsersComponent implements OnInit {
   }
 
   keyPress(event: any) {
-    const pattern = /[0-9\+\-\ ]/;
+    const pattern = /[0-9]/;
     let inputChar = String.fromCharCode(event.charCode);
     if (event.keyCode != 8 && !pattern.test(inputChar)) {
       event.preventDefault();
@@ -59,14 +59,24 @@ export class UsersComponent implements OnInit {
 
   getUsers() {
     this.apiService.getUsers().subscribe((result: any) => {
-      this.users = result;
-      console.log(result);
-
+      this.users = [];
+      result.forEach((user: any) => {
+        user.password = '';
+        delete user['emailVerified'];
+        delete user['metadata'];
+        delete user['passwordHash'];
+        delete user['passwordSalt'];
+        delete user['customClaims'];
+        delete user['tokensValidAfterTime'];
+        delete user['providerData'];
+        user['phoneNumber'] = user['phoneNumber'].substring(3);
+        this.users?.push(user);        
+      });
     });
   }
 
-  deleteUser(id: string) {
-    this.apiService.deleteUser(id).subscribe((result: any) => {
+  deleteUser(uid: string) {
+    this.apiService.deleteUser(uid).subscribe((result: any) => {
       this.getUsers();
     });
   }
@@ -79,6 +89,7 @@ export class UsersComponent implements OnInit {
     if (!this.isNew) {
       this.form.setValue(user);
     } else {
+      this.form.controls['password'].addValidators(Validators.required);
       this.form.reset();
       this.form.patchValue({ uid: 0 }); // Id fix on save
     }

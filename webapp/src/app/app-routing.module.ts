@@ -16,6 +16,7 @@ import { CustomersComponent } from './admin/customers/customers.component';
 import { OrdersComponent } from './admin/orders/orders.component';
 import { ReportsComponent } from './admin/reports/reports.component';
 import { UsersComponent } from './admin/users/users.component';
+import { SigninComponent } from './admin/signin/signin.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,7 @@ const routes: Routes = [
 {path: 'admin/orders', component: OrdersComponent},
 {path: 'admin/users', component: UsersComponent},
 {path: 'admin/reports', component: ReportsComponent},
+{path: 'admin/sigin', component: SigninComponent},
 
 {path: '**', pathMatch: 'full', redirectTo: 'home'}
 

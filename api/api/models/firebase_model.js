@@ -4,6 +4,7 @@ const firebase_methods = require('../firebase_methods');
 class FirebaseModel {
     cartCollection = 'cart';
     productCollection = 'products';
+    recipesCollection = 'recipes';
 
     constructor() {
         if (this.instance) return this.instance; // Singleton
@@ -34,6 +35,11 @@ class FirebaseModel {
     // Users
     getUsers() { return firebase_methods.getUsers(); }
     addUser(user) { return firebase_methods.addUser(user); }
+    updateUser(uid, user) { return firebase_methods.updateUser(uid, user); }
+    deleteUser(uid) { return firebase_methods.deleteUser(uid); }
+
+    // Recipes
+    getRecipes() { return firebase_methods.getRecipes(this.recipesCollection); }
 }
 
 module.exports = new FirebaseModel();

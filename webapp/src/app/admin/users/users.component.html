@@ -10,7 +10,8 @@
             <button class="main-btn primary-btn btn-hover" (click)="openModal(null)">Add user</button>
         </div>
     </div>
-    <div class="table-wrapper table-responsive">
+    <app-animation mode="table" [ngClass]="{'visually-hidden': users}"></app-animation>
+    <div class="table-wrapper table-responsive" [ngClass]="{'visually-hidden': !users}">
         <table class="table">
             <thead>
                 <tr>
@@ -64,8 +65,8 @@
                                 <i class="bi bi-pencil"></i>
                             </button>
                             <button class="text-danger"
-                                [swal]="{ title: 'Are you sure you want to delete the \'' + user.title + '\'?', confirmButtonText: 'Yes', showCancelButton: true, cancelButtonText: 'No' }"
-                                (confirm)="deleteUser(user.id)">
+                                [swal]="{ title: 'Are you sure you want to delete the user \'' + user.displayName + '\'?', confirmButtonText: 'Yes', showCancelButton: true, cancelButtonText: 'No' }"
+                                (confirm)="deleteUser(user.uid)">
                                 <i class="bi bi-trash"></i>
                             </button>
                         </div>
@@ -78,11 +79,11 @@
 
 <!-- Modal -->
 <div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="productModalTitle" aria-hidden="true">
+    aria-labelledby="userModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content card-style">
             <div class="modal-header">
-                <h5 class="modal-title" id="productModalTitle">{{isNew ? 'Add product' : 'Edit product'}}</h5>
+                <h5 class="modal-title" id="userModalTitle">{{isNew ? 'Add user' : 'Edit user'}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -169,13 +170,13 @@
                         </div>
                         <div class="col-lg-4">
                             <div class="select-style-1">
-                                <label>Disabled</label>
+                                <label>Status</label>
                                 <div class="select-position">
                                     <select formControlName="disabled"
                                         [ngClass]="{'is-invalid':!form.get('disabled')?.valid}">
                                         <option value="">Select an option</option>
-                                        <option value="true">Yes</option>
-                                        <option value="false">No</option>
+                                        <option value="false">Enabled</option>
+                                        <option value="true">Disabled</option>
                                     </select>
                                     <div *ngIf="form.controls['disabled'].errors?.['required']"
                                         class="invalid-feedback">

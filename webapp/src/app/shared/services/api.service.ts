@@ -27,7 +27,8 @@ export class ApiService {
   }
 
   private put(endpoint: string, id: string, body: string) {
-    return this.httpClient.put(`${this.url}${endpoint}/${id}`, this.productToJson(body));
+    var b = endpoint === 'product' ? this.productToJson(body) : endpoint === 'user' ? this.userToJson(body) : body
+    return this.httpClient.put(`${this.url}${endpoint}/${id}`, b);
   }
 
   private delete(endpoint: string, id: string) {
@@ -53,10 +54,10 @@ export class ApiService {
   private userToJson(user: any): any {
     return {
       'email': user.email,
-      'password': user.password,
+      ...(user.password) && {'password': user.password},
       'displayName': user.displayName,
       'photoURL': user.photoURL,
-      'phoneNumber': user.phoneNumber,
+      'phoneNumber': '+52' + user.phoneNumber,
       'disabled': user.disabled === 'true'
     };
   }
@@ -87,6 +88,11 @@ export class ApiService {
     return this.get(`search?q=${search}&type=product`);
   }
 
+  // Recipes
+  getRecipes() {
+    return this.get('recipe');
+  }
+
   // Users
   getUsers() {
     return this.get(`user`);
@@ -101,10 +107,10 @@ export class ApiService {
   }
 
   updateUser(user: any) {
-    return this.put('user', user.id, user);
+    return this.put('user', user.uid, user);
   }
 
-  deleteUser(id: any) {
-    return this.delete('user', id);
+  deleteUser(uid: any) {
+    return this.delete('user', uid);
   }
 }
