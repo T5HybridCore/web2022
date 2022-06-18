@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { Producto } from '../producto';
+
 import { ProductoService } from '../shared/producto.service';
 import { ApiService } from '../shared/services/api.service';
+import { QR } from '../producto';
+import {URLS} from '../misproductos'
 
 @Component({
   selector: 'app-ver-un-producto',
@@ -17,9 +19,24 @@ export class VerUnProductoComponent implements OnInit {
   
   loadingProduct: boolean;
 
+//generacion de QR aleatorio
+  urls:QR[]=URLS;
+  random:number=0;
+  flag_qr:boolean=false;
+
+
+
+
   constructor(private router: ActivatedRoute, private api: ApiService) {
-    this.loadingProduct = true;
     console.log('dentro de ver producto CONSTRUCTOR ');
+    this.loadingProduct = true;
+
+         
+      this.random=Math.floor(Math.random() * (9 - 0)) + 0;
+      console.log("Numero aleatorio == " + this.random);      
+      this.flag_qr=true;
+
+    
 
     this.router.params.subscribe((params) => {
       this.getProduct(params['id']);
@@ -44,9 +61,8 @@ export class VerUnProductoComponent implements OnInit {
       this.product = product;
 
       //prueba en consola
-      console.log(this.product.Title);
-      console.log(this.product.Manufacturer);
-      console.log(this.product.Price);
+      console.log(this.product.title);
+      
       this.loadingProduct = false;
     });
   }

@@ -1,1 +1,31 @@
-<p>vegetables works!</p>
+<div class="card-deck">
+  <ng-container *ngIf="!flag">
+    <ng-container *ngFor="let item of products">
+      <ng-container *ngIf="item.category == 'Vegetables'">
+        <div class="card">
+          <img
+            class="card-img-top"
+            src="{{ item.picture }}"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <div
+              (click)="seeProduct(item)"
+              class="cardpuntero"
+              *ngIf="showCard(item)"
+            >
+              <p>Product: {{ item.title }}</p>
+            </div>
+            <div class="card-footer">
+              <small>
+                Category: {{ item.category }} <br />
+                Manufacturer: {{ item.manufacturer }} <br />
+                <b> Price: {{ item.price | currency }} </b> <br />
+              </small>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>

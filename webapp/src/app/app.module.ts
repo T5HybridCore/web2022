@@ -30,6 +30,7 @@ import { ReportsComponent } from './admin/reports/reports.component';
 import { HeaderComponent } from './admin/header/header.component';
 import { SigninComponent } from './admin/signin/signin.component';
 import { UsersComponent } from './admin/users/users.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,11 @@ import { UsersComponent } from './admin/users/users.component';
     FormsModule, 
     ReactiveFormsModule,
     HttpClientModule,
+<<<<<<< HEAD
     SweetAlert2Module.forRoot()
+=======
+    QRCodeModule
+>>>>>>> 154bd3f14c9df219705a250d5d4ad41c38afff0e
   ],
   providers: [],
   bootstrap: [AppComponent]
