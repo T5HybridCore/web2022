@@ -3,7 +3,7 @@
 
         <input #word type="text" (keyup)="search(word.value)" class="form-control" placeholder="Search Product..."> 
     </div> 
-    <app-loading *ngIf="this.flag"></app-loading> 
-</div>
+   </div>
+   <app-loading *ngIf="this.flag_loading"></app-loading>
    <app-product-card *ngIf="!this.flag" [items]="this.products"></app-product-card>
   

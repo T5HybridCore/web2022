@@ -8,7 +8,7 @@
   <div class="container1">
     <div class="container2">
 
-      <div class="note-wrapper success-alert py-4 px-sm-3 px-lg-5">
+      <div class="note-wrapper success-alert">
         <div class="alert">
           <h5 class="text-bold mb-15">Note:</h5>
           <p class="text-md text-black">
@@ -17,8 +17,11 @@
           </p>
         </div>
       </div>
-      <qrcode *ngIf="flag_qr===true" [qrdata]="urls[random].url" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
-     
+
+      <div class="qr">
+        <qrcode *ngIf="flag_qr===true" [qrdata]="urls[random].url" [errorCorrectionLevel]="'M'"></qrcode>
+      </div>
+      
       
     </div>
        
