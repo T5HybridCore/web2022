@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, ValidatorFn, AbstractControl, ValidationErrors,  } from '@angular/forms';
+
 
 @Component({
   selector: 'app-signup',
@@ -8,26 +9,57 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class SignupComponent implements OnInit {
 
+  title = 'formreactivos';
   forma!: FormGroup;
-  band=false;
+  usuario:any={
+    firstname:"",
+    lastname:"",
+    email:"",
+    password:"",
+    password2:"",
+    address:"",
+    city:"",
+    }
   
-  constructor() { 
+  constructor(){
     this.forma = new FormGroup({
-      'name': new FormControl('',Validators.pattern("^[A-Za-z ]{3,40}$")),
-      'lastname': new FormControl('',Validators.pattern("^[A-Za-z ]{3,40}$")),
-      'mail': new FormControl('',Validators.email),
-      'account': new FormControl('',Validators.pattern("^[A-Za-z0-9 $!%*#?&._-]{3,40}$")),
-      'password': new FormControl('',Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$")),
-      'password2': new FormControl('',Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$"))
-      });
+      'firstname': new FormControl('', [Validators.required, Validators.minLength(3)]),
+    'lastname': new FormControl('', [Validators.required, Validators.minLength(3)]  ),
+    'email': new FormControl('',[Validators.required,Validators.email]),
+    'password': new FormControl('',[Validators.required,Validators.minLength(5)]),
+    'password2': new FormControl('',[Validators.required,Validators.minLength(5)]),
+    'address': new FormControl('',[Validators.required,Validators.minLength(3)]),
+    'city': new FormControl('', [Validators.required, Validators.minLength(3)]  ),
+    }, { 
+      validators: this.checkPasswords
+    });    
+    this.forma.setValue(this.usuario);
   }
-
-  ngOnInit(): void {
-  }
-
-  saveChanges():void{
-    this.band=this.forma.get('password')?.value==this.forma.get('password2')?.value;
+  guardarCambios():void{
+    console.log("metodo guardarCambios");
     console.log(this.forma);
     console.log(this.forma.value);
+    this.forma.reset({
+      firstname:'',
+      lastname:'',
+      email:'',
+      password:'',
+      password2:'',
+      address:'',
+      city:'',
+      });//inicializar vacíos los campos
+  } 
+  
+  
+    ngOnInit() {
+      //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+      //Add 'implements OnInit' to the class.
+    
+    }
+    checkPasswords: ValidatorFn = (group: AbstractControl):  ValidationErrors | null => { 
+      let pass = group.get('password')!.value;
+      let confirmPass = group.get('password2')!.value
+    
+      return pass === confirmPass ? null : { notSame: true }
     }
 }
