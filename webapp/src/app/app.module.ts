@@ -34,6 +34,8 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
+import { GraphComponent } from './graph/graph.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
     ReportsComponent,
     HeaderComponent,
     SigninComponent,
-    UsersComponent
+    UsersComponent,
+    GraphComponent,
+    NgApexchartsModule
   ],
   imports: [
     BrowserModule,
