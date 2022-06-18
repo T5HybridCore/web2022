@@ -1,11 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-pagetitle',
   templateUrl: './pagetitle.component.html',
   styleUrls: ['./pagetitle.component.css']
 })
-export class PagetitleComponent implements OnInit {
+export class PagetitleComponent implements OnChanges {
   
   // Parameters
   @Input() title = '';
@@ -16,7 +16,7 @@ export class PagetitleComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
     // Breadcrumb
     this.breadcrumb();
   }

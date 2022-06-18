@@ -2,6 +2,7 @@ const firebase_methods = require('../firebase_methods');
 
 // Singleton design pattern
 class FirebaseModel {
+    cartCollection = 'cart';
     productCollection = 'products';
 
     constructor() {
@@ -13,23 +14,25 @@ class FirebaseModel {
 
     //signUp(body) { return firebase_methods.signUp(body); }
 
-    //signIn(body) { return firebase_methods.signIn(body); }
+    signIn(body) { return firebase_methods.signIn(body); }
+
+    // Cart
+    getCart(id) { return firebase_methods.getById(this.cartCollection, id); }
+    addCart(cart) { return firebase_methods.getById(this.cartCollection); }
+    updateCart(id, cart) { return firebase_methods.update(this.cartCollection, id, cart); }
 
     // Products
     getProducts() { return firebase_methods.get(this.productCollection); }
     getProduct(id) { return firebase_methods.getById(this.productCollection, id); }
     addProduct(product) { return firebase_methods.post(this.productCollection, product); }
+    updateProduct(id, product) { return firebase_methods.update(this.productCollection, id, product); }
+    deleteProduct(id) { return firebase_methods.delete(this.productCollection, id); }
 
     // Search
     searchProducts(term) { return firebase_methods.search(this.productCollection, term) }
 
-    //getById(id) { return firebase.getById(this.collection, id) }
-
-    //add(book) { return firebase.post(this.collection, book) }
-
-    //update(id, book) { return firebase.update(this.collection, id, book) }
-
-    //delete(id) { return firebase.delete(this.collection, id) }
+    // Users
+    getUsers() { return firebase_methods.getUsers(); }
 }
 
 module.exports = new FirebaseModel();

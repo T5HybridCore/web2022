@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { HttpClientModule } from '@angular/common/http';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
@@ -18,11 +20,16 @@ import { VerUnProductoComponent } from './ver-un-producto/ver-un-producto.compon
 import { FaqComponent } from './faq/faq.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { LoadingComponent } from './loading/loading.component';
-import { HttpClientModule } from '@angular/common/http';
 import { ProductsComponent } from './admin/products/products.component';
 import { AnimationComponent } from './utils/animation/animation.component';
 import { SidebarComponent } from './admin/sidebar/sidebar.component';
 import { PagetitleComponent } from './admin/pagetitle/pagetitle.component';
+import { CustomersComponent } from './admin/customers/customers.component';
+import { OrdersComponent } from './admin/orders/orders.component';
+import { ReportsComponent } from './admin/reports/reports.component';
+import { HeaderComponent } from './admin/header/header.component';
+import { SigninComponent } from './admin/signin/signin.component';
+import { UsersComponent } from './admin/users/users.component';
 
 @NgModule({
   declarations: [
@@ -44,14 +51,21 @@ import { PagetitleComponent } from './admin/pagetitle/pagetitle.component';
     ProductsComponent,
     AnimationComponent,
     SidebarComponent,
-    PagetitleComponent
+    PagetitleComponent,
+    CustomersComponent,
+    OrdersComponent,
+    ReportsComponent,
+    HeaderComponent,
+    SigninComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule, 
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,189 @@
+<div class="card-style mb-30">
+    <div class="d-flex">
+        <div class="flex-grow-1">
+            <h6 class="mb-10">All users ({{users?.length}})</h6>
+            <p class="text-sm mb-20">
+                List of all users with admin role
+            </p>
+        </div>
+        <div class="m-auto">
+            <button class="main-btn primary-btn btn-hover" (click)="openModal(null)">Add user</button>
+        </div>
+    </div>
+    <div class="table-wrapper table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <h6>Email</h6>
+                    </th>
+                    <th>
+                        <h6>UID</h6>
+                    </th>
+                    <th>
+                        <h6>Verified</h6>
+                    </th>
+                    <th>
+                        <h6>Action</h6>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td class="min-width">
+                        <div class="lead">
+                            <div class="lead-image">
+                                <img src="{{user.picture}}" alt="">
+                            </div>
+                            <div class="lead-text">
+                                <p>{{user.email}}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="min-width">
+                        <p>{{user.uid}}</p>
+                    </td>
+                    <td class="min-width">
+                        <div *ngIf="user.emailVerified else invalid">
+                            <span class="status-btn success-btn">Yes</span>
+                        </div>
+                        <ng-template #invalid>
+                            <span class="status-btn close-btn">No</span>
+                        </ng-template>
+
+                    </td>
+                    <td>
+                        <div class="action">
+                            <button class="text-primary" (click)="openModal(user)">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button class="text-danger"
+                                [swal]="{ title: 'Are you sure you want to delete the \'' + user.title + '\'?', confirmButtonText: 'Yes', showCancelButton: true, cancelButtonText: 'No' }"
+                                (confirm)="deleteUser(user.id)">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="productModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content card-style">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productModalTitle">{{isNew ? 'Add product' : 'Edit product'}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form" (ngSubmit)="closeModal()" class="needs-validation" novalidate>
+                    <div class="visually-hidden">
+                        <input type="text" placeholder="id..." formControlName="uid">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-style-1">
+                                <label>Email</label>
+                                <input type="email" placeholder="email..." formControlName="email"
+                                    [ngClass]="{'is-invalid':!form.get('email')?.valid}">
+                                <div *ngIf="form.controls['email'].errors?.['required']" class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['email'].errors?.['email']" class="invalid-feedback">
+                                    * Invalid email
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-style-1">
+                                <label>Password</label>
+                                <input type="password" placeholder="password..." formControlName="password"
+                                    [ngClass]="{'is-invalid':!form.get('password')?.valid}">
+                                <div *ngIf="form.controls['password'].errors?.['required']" class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['password'].errors?.['minlength']" class="invalid-feedback">
+                                    * At least 8 characters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-style-1">
+                                <label>Name</label>
+                                <input type="text" placeholder="name..." formControlName="displayName"
+                                    [ngClass]="{'is-invalid':!form.get('displayName')?.valid}">
+                                <div *ngIf="form.controls['displayName'].errors?.['required']"
+                                    class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['displayName'].errors?.['minlength']"
+                                    class="invalid-feedback">
+                                    * At least 3 characters
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-style-1">
+                                <label>Phone</label>
+                                <input type="text" placeholder="phone..." formControlName="phoneNumber"
+                                    [ngClass]="{'is-invalid':!form.get('phoneNumber')?.valid}">
+                                <div *ngIf="form.controls['phoneNumber'].errors?.['required']" class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['phoneNumber'].errors?.['minlength']" class="invalid-feedback">
+                                    * At least 10 characters
+                                </div>
+                                <div *ngIf="form.controls['phoneNumber'].errors?.['maxlength']" class="invalid-feedback">
+                                    * No more than 10 characters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="input-style-1">
+                                <label>Picture</label>
+                                <input type="text" placeholder="picture..." formControlName="photoUrl"
+                                    [ngClass]="{'is-invalid':!form.get('photoUrl')?.valid}">
+                                <div *ngIf="form.controls['photoUrl'].errors?.['required']" class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['photoUrl'].errors?.['minlength']" class="invalid-feedback">
+                                    * At least 3 characters
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="select-style-1">
+                                <label>Disabled</label>
+                                <div class="select-position">
+                                    <select formControlName="disabled"
+                                        [ngClass]="{'is-invalid':!form.get('disabled')?.valid}">
+                                        <option value="">Select an option</option>
+                                        <option value="true">Yes</option>
+                                        <option value="false">No</option>
+                                    </select>
+                                    <div *ngIf="form.controls['disabled'].errors?.['required']" class="invalid-feedback">
+                                        * Field required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="action d-flex flex-wrap justify-content-end">
+                        <button type="submit" class="main-btn primary-btn square-btn btn-hover m-1"
+                            [disabled]="form.invalid">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

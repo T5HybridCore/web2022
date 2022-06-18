@@ -27,6 +27,9 @@
                         <h6>Price</h6>
                     </th>
                     <th>
+                        <h6>Stock</h6>
+                    </th>
+                    <th>
                         <h6>Action</h6>
                     </th>
                 </tr>
@@ -52,6 +55,9 @@
                     <td class="min-width">
                         <p>{{product.price | currency}}</p>
                     </td>
+                    <td class="min-width">
+                        <p>{{product.stock}}</p>
+                    </td>
                     <td>
                         <div class="action">
                             <button class="text-success" (click)="openPreviewModal(product)">
@@ -60,7 +66,9 @@
                             <button class="text-primary" (click)="openModal(product)">
                                 <i class="bi bi-pencil"></i>
                             </button>
-                            <button class="text-danger">
+                            <button class="text-danger"
+                                [swal]="{ title: 'Are you sure you want to delete the \'' + product.title + '\'?', confirmButtonText: 'Yes', showCancelButton: true, cancelButtonText: 'No' }"
+                                (confirm)="deleteProduct(product.id)">
                                 <i class="bi bi-trash"></i>
                             </button>
                         </div>
@@ -82,8 +90,11 @@
             </div>
             <div class="modal-body">
                 <form [formGroup]="form" (ngSubmit)="closeModal()" class="needs-validation" novalidate>
+                    <div class="visually-hidden">
+                        <input type="text" placeholder="id..." formControlName="id">
+                    </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-lg-6">
                             <div class="input-style-1">
                                 <label>Title</label>
                                 <input type="text" placeholder="title..." formControlName="title"
@@ -96,7 +107,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-lg-3">
                             <div class="input-style-1">
                                 <label>Category</label>
                                 <input type="text" placeholder="category..." formControlName="category"
@@ -109,7 +120,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-lg-3">
                             <div class="input-style-1">
                                 <label>Subcategory</label>
                                 <input type="text" placeholder="subcategory..." formControlName="subCategory"
@@ -125,7 +136,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-lg-6">
                             <div class="input-style-1">
                                 <label>Manufacturer</label>
                                 <input type="text" placeholder="manufacturer..." formControlName="manufacturer"
@@ -140,7 +151,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-lg-6">
                             <div class="input-style-1">
                                 <label>Contents</label>
                                 <input type="text" placeholder="contents..." formControlName="contents"
@@ -155,10 +166,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-lg-4">
                             <div class="input-style-1">
                                 <label>Price</label>
-                                <input type="text" placeholder="price..." formControlName="price"
+                                <input type="number" placeholder="price..." formControlName="price"
                                     [ngClass]="{'is-invalid':!form.get('price')?.valid}">
                                 <div *ngIf="form.controls['price'].errors?.['required']" class="invalid-feedback">
                                     * Field required
@@ -171,7 +182,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-lg-4">
+                            <div class="input-style-1">
+                                <label>Stock</label>
+                                <input type="number" placeholder="stock..." formControlName="stock"
+                                    [ngClass]="{'is-invalid':!form.get('stock')?.valid}">
+                                <div *ngIf="form.controls['stock'].errors?.['required']" class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['stock'].errors?.['min']" class="invalid-feedback">
+                                    * Greater than 0
+                                </div>
+                                <div *ngIf="form.controls['stock'].errors?.['pattern']" class="invalid-feedback">
+                                    * Only numbers
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
                             <div class="select-style-1">
                                 <label>Organic</label>
                                 <div class="select-position">
@@ -230,3 +257,22 @@
         </div>
     </div>
 </div>
+
+<!-- Modal (Preview) -->
+<div class="modal fade" id="modalPreview" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="previewModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content card-style">
+            <div class="modal-header">
+                <h5 class="modal-title" id="previewModalTitle">{{previewTitle}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <img src="{{previewImgSrc}}" class="img-fluid bg-danger" alt="...">
+            </div>
+        </div>
+    </div>
+</div>
+
+<swal #productAdded title="Product successfully added" icon="success"></swal>
+<swal #productUpdated title="Product successfully updated" icon="success"></swal>

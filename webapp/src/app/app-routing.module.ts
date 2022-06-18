@@ -12,6 +12,10 @@ import { SignupComponent } from './signup/signup.component';
 import { FaqComponent } from './faq/faq.component';
 import { VerUnProductoComponent } from './ver-un-producto/ver-un-producto.component';
 import { ProductsComponent } from './admin/products/products.component';
+import { CustomersComponent } from './admin/customers/customers.component';
+import { OrdersComponent } from './admin/orders/orders.component';
+import { ReportsComponent } from './admin/reports/reports.component';
+import { UsersComponent } from './admin/users/users.component';
 
 
 const routes: Routes = [
@@ -31,7 +35,12 @@ const routes: Routes = [
 {path: 'product/:id', component: VerUnProductoComponent},
 
 // Admin
+{path: 'admin', pathMatch: 'full', redirectTo: 'admin/products'},
 {path: 'admin/products', component: ProductsComponent},
+{path: 'admin/customers', component: CustomersComponent},
+{path: 'admin/orders', component: OrdersComponent},
+{path: 'admin/users', component: UsersComponent},
+{path: 'admin/reports', component: ReportsComponent},
 
 {path: '**', pathMatch: 'full', redirectTo: 'home'}
 

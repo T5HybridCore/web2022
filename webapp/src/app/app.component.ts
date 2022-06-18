@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { filter, map, Observable } from 'rxjs';
+import { CustomersComponent } from './admin/customers/customers.component';
+import { OrdersComponent } from './admin/orders/orders.component';
 import { ProductsComponent } from './admin/products/products.component';
+import { ReportsComponent } from './admin/reports/reports.component';
+import { UsersComponent } from './admin/users/users.component';
 
 @Component({
   selector: 'app-root',
@@ -28,11 +32,9 @@ export class AppComponent implements OnInit {
 
   // On Activated
   onActivated(component: any) {
-    this.isAdmin = (component instanceof ProductsComponent);
+    this.isAdmin = component instanceof ProductsComponent || component instanceof CustomersComponent || component instanceof OrdersComponent
+      || component instanceof UsersComponent || component instanceof ReportsComponent;
 
-    // Delete
-    if (component instanceof ProductsComponent) {
-      this.title = component.title;
-    }
+    if (this.isAdmin) this.title = component.title;
   }
 }

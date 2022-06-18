@@ -3,6 +3,18 @@ const url = require('url');
 const router = express.Router();
 const firebaseModel = require('../models/firebase_model');
 
+// Sign in
+router.post('/signin/', async (req, res, next) => {
+    try {
+        const result = await firebaseModel.addProduct(req.body);
+        if (!result) return res.sendStatus(409);
+        return res.status(201).json(result);
+    }
+    catch (e) {
+        return next(e);
+    }
+});
+
 // Get all products
 router.get('/product/', async (req, res, next) => {
     try {
@@ -38,6 +50,30 @@ router.post('/product/', async (req, res, next) => {
     }
 });
 
+// Update a product
+router.put('/product/:id', async (req, res, next) => {
+    try {
+        const result = await firebaseModel.updateProduct(req.params.id, req.body);
+        if (!result) return res.sendStatus(409);
+        return res.status(200).json(result);
+    }
+    catch (e) {
+        return next(e);
+    }
+});
+
+// Delete a product
+router.delete('/product/:id', async (req, res, next) => {
+    try {
+        const result = await firebaseModel.deleteProduct(req.params.id);
+        if (!result) return res.sendStatus(409);
+        return res.status(200).json(result);
+    }
+    catch (e) {
+        return next(e);
+    }
+});
+
 // Search
 router.get('/search', async (req, res, next) => {
     try {
@@ -47,6 +83,17 @@ router.get('/search', async (req, res, next) => {
         if (!result) return res.sendStatus(404);
         return res.json(result);
     } catch (e) {
+        return next(e);
+    }
+});
+
+// Get all users
+router.get('/user', async (req, res, next) => {
+    try {
+        const result = await firebaseModel.getUsers();
+        return res.json(result);
+    }
+    catch (e) {
         return next(e);
     }
 });

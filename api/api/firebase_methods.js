@@ -7,6 +7,7 @@ class FirebaseMethods {
 
         const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
         const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
+        const { getAuth } = require('firebase-admin/auth');
 
         // Service Account
         const serviceAccount = require('./web-2022-f5262-firebase-adminsdk-fbnow-ecc67748f4.json');
@@ -16,11 +17,65 @@ class FirebaseMethods {
 
         // Initialize Cloud Firestore and get a reference to the service
         this.db = getFirestore();
+
+        // Initialize Auth
+        this.auth = getAuth();
+    }
+
+    // Sign in
+    async signIn(body) {
+        const result = await this.db.collection(collection).add(body);
+        body.id = body.id;
+        return body;
+    }
+
+    // Get users
+    async getUsers() {
+        const admins = await this.db.collection('admins').get();
+        const result = await this.auth.listUsers();
+
+        const list = [];
+        result.users.forEach((user) => {
+            var u;
+            var add = false;
+            admins.forEach((doc) => {
+                const admin = doc.data();
+
+                if (user.uid === admin.uid) {
+                    u = {
+                        "uid": user.uid,
+                        "email": user.email,
+                        "emailVerified": user.emailVerified,
+                        "disabled": user.disabled,
+                        "metadata": {
+                            "lastSignInTime": user.metadata.lastSignInTime,
+                            "creationTime": user.metadata.creationTime
+                        },
+                        "passwordHash": user.passwordHash,
+                        "passwordSalt": user.passwordSalt,
+                        "tokensValidAfterTime": user.tokensValidAfterTime,
+                        "providerData": [
+                            {
+                                "uid": user.uid,
+                                "email": user.email,
+                                "providerId": "password"
+                            }
+                        ],
+                        "picture": admin.picture
+                    };
+                    add = true;
+                }
+            });
+
+            if (add) list.push(u);
+        });
+
+        return list.length ? list : null;
     }
 
     // Get
     async get(collection) {
-        const result = await this.db.collection(collection).get();
+        const result = await this.db.collection(collection).orderBy('title').get();
 
         const list = [];
         result.forEach((doc) => {

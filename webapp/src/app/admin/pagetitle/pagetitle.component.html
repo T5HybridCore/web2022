@@ -12,7 +12,7 @@
                         <li class="breadcrumb-item" *ngFor="let path of pathArray; let i = index"
                             [ngClass]="{'active': pathArray.length - 1 === i}"
                             [attr.aria-current]="pathArray.length - 1 === i ? 'page': null">
-                            <a href="#" *ngIf="pathArray.length - 1 !== i; else plain">{{path | titlecase}}</a>
+                            <a [routerLink]="['/admin']" *ngIf="pathArray.length - 1 !== i; else plain">{{path | titlecase}}</a>
                             <ng-template #plain>
                                 {{path | titlecase}}
                             </ng-template>
