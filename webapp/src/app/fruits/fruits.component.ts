@@ -38,4 +38,5 @@ export class FruitsComponent implements OnInit {
     console.log(item);
     return item;
   }
+  
 }
