@@ -31,6 +31,11 @@ import { HeaderComponent } from './admin/header/header.component';
 import { SigninComponent } from './admin/signin/signin.component';
 import { UsersComponent } from './admin/users/users.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { GraphComponent } from './graph/graph.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -58,7 +63,9 @@ import { QRCodeModule } from 'angularx-qrcode';
     ReportsComponent,
     HeaderComponent,
     SigninComponent,
-    UsersComponent
+    UsersComponent,
+    GraphComponent,
+    NgApexchartsModule
   ],
   imports: [
     BrowserModule,
@@ -67,7 +74,9 @@ import { QRCodeModule } from 'angularx-qrcode';
     ReactiveFormsModule,
     HttpClientModule,
     SweetAlert2Module.forRoot(),
-    QRCodeModule
+    QRCodeModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth())
   ],
   providers: [],
   bootstrap: [AppComponent]

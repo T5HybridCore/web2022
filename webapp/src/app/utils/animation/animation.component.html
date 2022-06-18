@@ -1,9 +1,19 @@
 <div class="wrapper">
-    <div class="image animated-background"></div>
-    <div class="text">
-        <div class="text-line animated-background"></div>
-        <div class="text-line animated-background"></div>
-        <div class="text-line animated-background"></div>
-        <div class="text-line animated-background"></div>
+    <div *ngIf="mode === 'single' else table">
+        <div class="image animated-background"></div>
+        <div class="text ms-20">
+            <div class="text-line animated-background"></div>
+            <div class="text-line animated-background"></div>
+            <div class="text-line animated-background"></div>
+            <div class="text-line animated-background"></div>
+        </div>
     </div>
+    <ng-template #table>
+        <div class="text">
+            <div class="text-line animated-background"></div>
+            <div class="text-line animated-background"></div>
+            <div class="text-line animated-background"></div>
+            <div class="text-line animated-background"></div>
+        </div>
+    </ng-template>
 </div>

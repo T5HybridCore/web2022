@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "web-2022-f5262": {
+      "hosting": {
+        "webapp": [
+          "web-2022-f5262"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "web-2022-f5262"
+  }
+}

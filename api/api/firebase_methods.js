@@ -35,7 +35,6 @@ class FirebaseMethods {
 
         const list = [];
         result.users.forEach((user) => {
-            console.log(user);
             if (user.customClaims && user.customClaims['admin']) list.push(user);
         });
 
@@ -49,6 +48,18 @@ class FirebaseMethods {
 
         await this.auth.setCustomUserClaims(uid, {admin: true});
         return { uid };
+    }
+
+    async updateUser(uid, user) {
+        const result = await this.auth.updateUser(uid, user);
+        var uid = result.uid;
+        return { uid };
+    }
+
+    async deleteUser(uid) {
+        await this.auth.deleteUser(uid);
+        var code = '1';
+        return { code };
     }
 
     // Get
@@ -119,6 +130,20 @@ class FirebaseMethods {
                 data.id = doc.id;
                 list.push(data);
             }
+        });
+
+        return list.length ? list : null;
+    }
+
+    // Recipe videos
+    async getRecipes(collection) {
+        const result = await this.db.collection(collection).get();
+
+        const list = [];
+        result.forEach((doc) => {
+            const data = doc.data();
+            data.id = doc.id;
+            list.push(data);
         });
 
         return list.length ? list : null;

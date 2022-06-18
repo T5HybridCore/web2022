@@ -101,11 +101,44 @@ router.get('/user', async (req, res, next) => {
 // Add a new user
 router.post('/user', async (req, res, next) => {
     try {
-        console.log('Test: ');
-        console.log(req.body);
         const result = await firebaseModel.addUser(req.body);
         if (!result) return res.sendStatus(409);
         return res.status(201).json(result);
+    }
+    catch (e) {
+        return next(e);
+    }
+});
+
+// Update a user
+router.put('/user/:uid', async (req, res, next) => {
+    try {
+        const result = await firebaseModel.updateUser(req.params.uid, req.body);
+        if (!result) return res.sendStatus(409);
+        return res.status(200).json(result);
+    }
+    catch (e) {
+        return next(e);
+    }
+});
+
+// Delete a product
+router.delete('/user/:id', async (req, res, next) => {
+    try {
+        const result = await firebaseModel.deleteUser(req.params.id);
+        if (!result) return res.sendStatus(409);
+        return res.status(200).json(result);
+    }
+    catch (e) {
+        return next(e);
+    }
+});
+
+// Get all recipes
+router.get('/recipe', async (req, res, next) => {
+    try {
+        const result = await firebaseModel.getRecipes();
+        return res.json(result);
     }
     catch (e) {
         return next(e);
