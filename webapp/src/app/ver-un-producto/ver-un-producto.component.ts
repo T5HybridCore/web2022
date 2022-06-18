@@ -16,11 +16,12 @@ export class VerUnProductoComponent implements OnInit {
   //producto a imprimir
   product: any = {};
   //cantidad a comprar
+  amount:number=0;
   
   loadingProduct: boolean;
 
 //generacion de QR aleatorio
-  urls:QR[]=URLS;
+  urls:QR[]=[];
   random:number=0;
   flag_qr:boolean=false;
 
@@ -34,7 +35,7 @@ export class VerUnProductoComponent implements OnInit {
          
       this.random=Math.floor(Math.random() * (9 - 0)) + 0;
       console.log("Numero aleatorio == " + this.random);      
-      this.flag_qr=true;
+     
 
     
 
@@ -45,7 +46,15 @@ export class VerUnProductoComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.api.getRecipes().subscribe((result: any) => {
+      console.log(result);
+      this.urls=result;  
+      console.log("urls == "+this.urls[this.random].url); 
+      this.flag_qr=true;
+
+    });
+  }
 
   //metodo que busca productos
   getProduct(id: string) {
