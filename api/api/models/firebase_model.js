@@ -33,6 +33,7 @@ class FirebaseModel {
 
     // Users
     getUsers() { return firebase_methods.getUsers(); }
+    addUser(user) { return firebase_methods.addUser(user); }
 }
 
 module.exports = new FirebaseModel();

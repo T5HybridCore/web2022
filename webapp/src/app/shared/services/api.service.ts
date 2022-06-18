@@ -22,19 +22,20 @@ export class ApiService {
   }
 
   private post(endpoint: string, body: string) {
-    return this.httpClient.post(`${this.url}${endpoint}`, this.toJson(body));
+    var b = endpoint === 'product' ? this.productToJson(body) : endpoint === 'user' ? this.userToJson(body) : body;
+    return this.httpClient.post(`${this.url}${endpoint}`, b);
   }
 
   private put(endpoint: string, id: string, body: string) {
-    return this.httpClient.put(`${this.url}${endpoint}/${id}/`, this.toJson(body));
+    return this.httpClient.put(`${this.url}${endpoint}/${id}`, this.productToJson(body));
   }
 
   private delete(endpoint: string, id: string) {
-    return this.httpClient.delete(`${this.url}${endpoint}/${id}/`);
+    return this.httpClient.delete(`${this.url}${endpoint}/${id}`);
   }
 
   // Utils
-  private toJson(product: any): any {
+  private productToJson(product: any): any {
     return {
       'title': product.title,
       'category': product.category,
@@ -46,6 +47,17 @@ export class ApiService {
       'organic': product.organic,
       'description': product.description,
       'picture': product.picture
+    };
+  }
+
+  private userToJson(user: any): any {
+    return {
+      'email': user.email,
+      'password': user.password,
+      'displayName': user.displayName,
+      'photoURL': user.photoURL,
+      'phoneNumber': user.phoneNumber,
+      'disabled': user.disabled === 'true'
     };
   }
 

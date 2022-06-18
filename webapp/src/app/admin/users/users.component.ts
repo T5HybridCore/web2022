@@ -31,10 +31,10 @@ export class UsersComponent implements OnInit {
     this.form = new FormGroup({
       'uid': new FormControl('', [Validators.required]),
       'email': new FormControl('', [Validators.required, Validators.email]),
-      'phoneNumber': new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(10), Validators.maxLength(10)]),
+      'phoneNumber': new FormControl('+52', [Validators.required, Validators.pattern("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$"), Validators.minLength(10), Validators.maxLength(13)]),
       'password': new FormControl('', [Validators.required, Validators.minLength(8)]),
       'displayName': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'photoUrl': new FormControl('', [Validators.required, Validators.minLength(3)]),
+      'photoURL': new FormControl('', [Validators.required, Validators.minLength(3)]),
       'disabled': new FormControl('', [Validators.required])
     });
   }
@@ -47,6 +47,14 @@ export class UsersComponent implements OnInit {
     );
 
     this.getUsers();
+  }
+
+  keyPress(event: any) {
+    const pattern = /[0-9\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
   }
 
   getUsers() {
@@ -86,7 +94,7 @@ export class UsersComponent implements OnInit {
         let user = this.form.value;
         delete user['uid'];
 
-        this.apiService.addUser(this.form.value).subscribe(async () => {
+        this.apiService.addUser(user).subscribe(async () => {
           await this.userAdded.fire();
           this.getUsers();
         });

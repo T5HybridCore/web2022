@@ -4,7 +4,7 @@ const router = express.Router();
 const firebaseModel = require('../models/firebase_model');
 
 // Sign in
-router.post('/signin/', async (req, res, next) => {
+router.post('/signin', async (req, res, next) => {
     try {
         const result = await firebaseModel.addProduct(req.body);
         if (!result) return res.sendStatus(409);
@@ -16,7 +16,7 @@ router.post('/signin/', async (req, res, next) => {
 });
 
 // Get all products
-router.get('/product/', async (req, res, next) => {
+router.get('/product', async (req, res, next) => {
     try {
         const result = await firebaseModel.getProducts();
         return res.json(result);
@@ -39,7 +39,7 @@ router.get('/product/:id', async (req, res, next) => {
 });
 
 // Add a new product
-router.post('/product/', async (req, res, next) => {
+router.post('/product', async (req, res, next) => {
     try {
         const result = await firebaseModel.addProduct(req.body);
         if (!result) return res.sendStatus(409);
@@ -92,6 +92,20 @@ router.get('/user', async (req, res, next) => {
     try {
         const result = await firebaseModel.getUsers();
         return res.json(result);
+    }
+    catch (e) {
+        return next(e);
+    }
+});
+
+// Add a new user
+router.post('/user', async (req, res, next) => {
+    try {
+        console.log('Test: ');
+        console.log(req.body);
+        const result = await firebaseModel.addUser(req.body);
+        if (!result) return res.sendStatus(409);
+        return res.status(201).json(result);
     }
     catch (e) {
         return next(e);

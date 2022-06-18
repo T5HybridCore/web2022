@@ -15,13 +15,16 @@
             <thead>
                 <tr>
                     <th>
+                        <h6>Name</h6>
+                    </th>
+                    <th>
                         <h6>Email</h6>
                     </th>
                     <th>
                         <h6>UID</h6>
                     </th>
                     <th>
-                        <h6>Verified</h6>
+                        <h6>Status</h6>
                     </th>
                     <th>
                         <h6>Action</h6>
@@ -33,22 +36,25 @@
                     <td class="min-width">
                         <div class="lead">
                             <div class="lead-image">
-                                <img src="{{user.picture}}" alt="">
+                                <img src="{{user.photoURL}}" alt="">
                             </div>
                             <div class="lead-text">
-                                <p>{{user.email}}</p>
+                                <p>{{user.displayName}}</p>
                             </div>
                         </div>
+                    </td>
+                    <td class="min-width">
+                        <p>{{user.email}}</p>
                     </td>
                     <td class="min-width">
                         <p>{{user.uid}}</p>
                     </td>
                     <td class="min-width">
-                        <div *ngIf="user.emailVerified else invalid">
-                            <span class="status-btn success-btn">Yes</span>
+                        <div *ngIf="user.disabled else valid">
+                            <span class="status-btn close-btn">Disabled</span>
                         </div>
-                        <ng-template #invalid>
-                            <span class="status-btn close-btn">No</span>
+                        <ng-template #valid>
+                            <span class="status-btn success-btn">Enabled</span>
                         </ng-template>
 
                     </td>
@@ -82,7 +88,7 @@
             <div class="modal-body">
                 <form [formGroup]="form" (ngSubmit)="closeModal()" class="needs-validation" novalidate>
                     <div class="visually-hidden">
-                        <input type="text" placeholder="id..." formControlName="uid">
+                        <input type="text" placeholder="uid..." formControlName="uid">
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
@@ -118,8 +124,7 @@
                                 <label>Name</label>
                                 <input type="text" placeholder="name..." formControlName="displayName"
                                     [ngClass]="{'is-invalid':!form.get('displayName')?.valid}">
-                                <div *ngIf="form.controls['displayName'].errors?.['required']"
-                                    class="invalid-feedback">
+                                <div *ngIf="form.controls['displayName'].errors?.['required']" class="invalid-feedback">
                                     * Field required
                                 </div>
                                 <div *ngIf="form.controls['displayName'].errors?.['minlength']"
@@ -131,15 +136,18 @@
                         <div class="col-lg-6">
                             <div class="input-style-1">
                                 <label>Phone</label>
-                                <input type="text" placeholder="phone..." formControlName="phoneNumber"
+                                <input type="string" (keypress)="keyPress($event)" placeholder="phone..."
+                                    formControlName="phoneNumber"
                                     [ngClass]="{'is-invalid':!form.get('phoneNumber')?.valid}">
                                 <div *ngIf="form.controls['phoneNumber'].errors?.['required']" class="invalid-feedback">
                                     * Field required
                                 </div>
-                                <div *ngIf="form.controls['phoneNumber'].errors?.['minlength']" class="invalid-feedback">
+                                <div *ngIf="form.controls['phoneNumber'].errors?.['minlength']"
+                                    class="invalid-feedback">
                                     * At least 10 characters
                                 </div>
-                                <div *ngIf="form.controls['phoneNumber'].errors?.['maxlength']" class="invalid-feedback">
+                                <div *ngIf="form.controls['phoneNumber'].errors?.['maxlength']"
+                                    class="invalid-feedback">
                                     * No more than 10 characters
                                 </div>
                             </div>
@@ -149,12 +157,12 @@
                         <div class="col-lg-8">
                             <div class="input-style-1">
                                 <label>Picture</label>
-                                <input type="text" placeholder="picture..." formControlName="photoUrl"
+                                <input type="text" placeholder="picture..." formControlName="photoURL"
                                     [ngClass]="{'is-invalid':!form.get('photoUrl')?.valid}">
-                                <div *ngIf="form.controls['photoUrl'].errors?.['required']" class="invalid-feedback">
+                                <div *ngIf="form.controls['photoURL'].errors?.['required']" class="invalid-feedback">
                                     * Field required
                                 </div>
-                                <div *ngIf="form.controls['photoUrl'].errors?.['minlength']" class="invalid-feedback">
+                                <div *ngIf="form.controls['photoURL'].errors?.['minlength']" class="invalid-feedback">
                                     * At least 3 characters
                                 </div>
                             </div>
@@ -169,7 +177,8 @@
                                         <option value="true">Yes</option>
                                         <option value="false">No</option>
                                     </select>
-                                    <div *ngIf="form.controls['disabled'].errors?.['required']" class="invalid-feedback">
+                                    <div *ngIf="form.controls['disabled'].errors?.['required']"
+                                        class="invalid-feedback">
                                         * Field required
                                     </div>
                                 </div>
@@ -187,3 +196,6 @@
         </div>
     </div>
 </div>
+
+<swal #userAdded title="User successfully added" icon="success"></swal>
+<swal #userUpdated title="User successfully updated" icon="success"></swal>

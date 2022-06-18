@@ -31,46 +31,24 @@ class FirebaseMethods {
 
     // Get users
     async getUsers() {
-        const admins = await this.db.collection('admins').get();
         const result = await this.auth.listUsers();
 
         const list = [];
         result.users.forEach((user) => {
-            var u;
-            var add = false;
-            admins.forEach((doc) => {
-                const admin = doc.data();
-
-                if (user.uid === admin.uid) {
-                    u = {
-                        "uid": user.uid,
-                        "email": user.email,
-                        "emailVerified": user.emailVerified,
-                        "disabled": user.disabled,
-                        "metadata": {
-                            "lastSignInTime": user.metadata.lastSignInTime,
-                            "creationTime": user.metadata.creationTime
-                        },
-                        "passwordHash": user.passwordHash,
-                        "passwordSalt": user.passwordSalt,
-                        "tokensValidAfterTime": user.tokensValidAfterTime,
-                        "providerData": [
-                            {
-                                "uid": user.uid,
-                                "email": user.email,
-                                "providerId": "password"
-                            }
-                        ],
-                        "picture": admin.picture
-                    };
-                    add = true;
-                }
-            });
-
-            if (add) list.push(u);
+            console.log(user);
+            if (user.customClaims && user.customClaims['admin']) list.push(user);
         });
 
         return list.length ? list : null;
+    }
+
+    // Add user
+    async addUser(user) {
+        const result = await this.auth.createUser(user);
+        var uid = result.uid;
+
+        await this.auth.setCustomUserClaims(uid, {admin: true});
+        return { uid };
     }
 
     // Get
