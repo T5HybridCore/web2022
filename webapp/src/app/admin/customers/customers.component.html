@@ -1,1 +1,202 @@
-<p>customers works!</p>
+<div class="card-style mb-30">
+    <div class="d-flex">
+        <div class="flex-grow-1">
+            <h6 class="mb-10">All customers ({{customers?.length}})</h6>
+            <p class="text-sm mb-20">
+                List of all customers
+            </p>
+        </div>
+        <div class="m-auto">
+            <button class="main-btn primary-btn btn-hover" (click)="openModal(null)">Add customer</button>
+        </div>
+    </div>
+    <app-animation mode="table" [ngClass]="{'visually-hidden': customers}"></app-animation>
+    <div class="table-wrapper table-responsive" [ngClass]="{'visually-hidden': !customers}">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <h6>Name</h6>
+                    </th>
+                    <th>
+                        <h6>Email</h6>
+                    </th>
+                    <th>
+                        <h6>UID</h6>
+                    </th>
+                    <th>
+                        <h6>Status</h6>
+                    </th>
+                    <th>
+                        <h6>Action</h6>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let customer of customers">
+                    <td class="min-width">
+                        <div class="lead">
+                            <div class="lead-image">
+                                <img src="{{customer.photoURL}}" alt="">
+                            </div>
+                            <div class="lead-text">
+                                <p>{{customer.displayName}}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="min-width">
+                        <p>{{customer.email}}</p>
+                    </td>
+                    <td class="min-width">
+                        <p>{{customer.uid}}</p>
+                    </td>
+                    <td class="min-width">
+                        <div *ngIf="customer.disabled else valid">
+                            <span class="status-btn close-btn">Disabled</span>
+                        </div>
+                        <ng-template #valid>
+                            <span class="status-btn success-btn">Enabled</span>
+                        </ng-template>
+
+                    </td>
+                    <td>
+                        <div class="action">
+                            <button class="text-primary" (click)="openModal(customer)">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button class="text-danger"
+                                [swal]="{ title: 'Are you sure you want to delete the customer \'' + customer.displayName + '\'?', confirmButtonText: 'Yes', showCancelButton: true, cancelButtonText: 'No' }"
+                                (confirm)="deleteCustomer(customer.uid)">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="customerModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content card-style">
+            <div class="modal-header">
+                <h5 class="modal-title" id="customerModalTitle">{{isNew ? 'Add customer' : 'Edit customer'}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form" (ngSubmit)="closeModal()" class="needs-validation" novalidate>
+                    <div class="visually-hidden">
+                        <input type="text" placeholder="uid..." formControlName="uid">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-style-1">
+                                <label>Email</label>
+                                <input type="email" placeholder="email..." formControlName="email"
+                                    [ngClass]="{'is-invalid':!form.get('email')?.valid}">
+                                <div *ngIf="form.controls['email'].errors?.['required']" class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['email'].errors?.['email']" class="invalid-feedback">
+                                    * Invalid email
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-style-1">
+                                <label>Password</label>
+                                <input type="password" placeholder="password..." formControlName="password"
+                                    [ngClass]="{'is-invalid':!form.get('password')?.valid}">
+                                <div *ngIf="form.controls['password'].errors?.['required']" class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['password'].errors?.['minlength']" class="invalid-feedback">
+                                    * At least 8 characters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="input-style-1">
+                                <label>Name</label>
+                                <input type="text" placeholder="name..." formControlName="displayName"
+                                    [ngClass]="{'is-invalid':!form.get('displayName')?.valid}">
+                                <div *ngIf="form.controls['displayName'].errors?.['required']" class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['displayName'].errors?.['minlength']"
+                                    class="invalid-feedback">
+                                    * At least 3 characters
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-style-1">
+                                <label>Phone</label>
+                                <input type="string" (keypress)="keyPress($event)" placeholder="phone..."
+                                    formControlName="phoneNumber"
+                                    [ngClass]="{'is-invalid':!form.get('phoneNumber')?.valid}">
+                                <div *ngIf="form.controls['phoneNumber'].errors?.['required']" class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['phoneNumber'].errors?.['minlength']"
+                                    class="invalid-feedback">
+                                    * At least 10 characters
+                                </div>
+                                <div *ngIf="form.controls['phoneNumber'].errors?.['maxlength']"
+                                    class="invalid-feedback">
+                                    * No more than 10 characters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="input-style-1">
+                                <label>Picture</label>
+                                <input type="text" placeholder="picture..." formControlName="photoURL"
+                                    [ngClass]="{'is-invalid':!form.get('photoUrl')?.valid}">
+                                <div *ngIf="form.controls['photoURL'].errors?.['required']" class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['photoURL'].errors?.['minlength']" class="invalid-feedback">
+                                    * At least 3 characters
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="select-style-1">
+                                <label>Status</label>
+                                <div class="select-position">
+                                    <select formControlName="disabled"
+                                        [ngClass]="{'is-invalid':!form.get('disabled')?.valid}">
+                                        <option value="">Select an option</option>
+                                        <option value="false">Enabled</option>
+                                        <option value="true">Disabled</option>
+                                    </select>
+                                    <div *ngIf="form.controls['disabled'].errors?.['required']"
+                                        class="invalid-feedback">
+                                        * Field required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="action d-flex flex-wrap justify-content-end">
+                        <button type="submit" class="main-btn primary-btn square-btn btn-hover m-1"
+                            [disabled]="form.invalid">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<swal #customerAdded title="Customer successfully added" icon="success"></swal>
+<swal #customerUpdated title="Customer successfully updated" icon="success"></swal>

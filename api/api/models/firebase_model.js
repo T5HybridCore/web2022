@@ -13,14 +13,16 @@ class FirebaseModel {
         FirebaseModel.instance = this;
     }
 
-    //signUp(body) { return firebase_methods.signUp(body); }
-
-    signIn(body) { return firebase_methods.signIn(body); }
-
     // Cart
     getCart(id) { return firebase_methods.getById(this.cartCollection, id); }
     addCart(cart) { return firebase_methods.getById(this.cartCollection); }
     updateCart(id, cart) { return firebase_methods.update(this.cartCollection, id, cart); }
+
+    // Customers
+    getCustomers() { return firebase_methods.getCustomers(); }
+    addCustomer(customer) { return firebase_methods.addCustomer(customer); }
+    updateCustomer(uid, customer) { return firebase_methods.updateCustomer(uid, customer); }
+    deleteCustomer(uid) { return firebase_methods.deleteCustomer(uid); }
 
     // Products
     getProducts() { return firebase_methods.get(this.productCollection); }

@@ -3,12 +3,47 @@ const url = require('url');
 const router = express.Router();
 const firebaseModel = require('../models/firebase_model');
 
-// Sign in
-router.post('/signin', async (req, res, next) => {
+// Get all customers
+router.get('/customer', async (req, res, next) => {
     try {
-        const result = await firebaseModel.addProduct(req.body);
+        const result = await firebaseModel.getCustomers();
+        return res.json(result);
+    }
+    catch (e) {
+        return next(e);
+    }
+});
+
+// Add a new customer
+router.post('/customer', async (req, res, next) => {
+    try {
+        const result = await firebaseModel.addCustomer(req.body);
         if (!result) return res.sendStatus(409);
         return res.status(201).json(result);
+    }
+    catch (e) {
+        return next(e);
+    }
+});
+
+// Update a customer
+router.put('/customer/:uid', async (req, res, next) => {
+    try {
+        const result = await firebaseModel.updateCustomer(req.params.uid, req.body);
+        if (!result) return res.sendStatus(409);
+        return res.status(200).json(result);
+    }
+    catch (e) {
+        return next(e);
+    }
+});
+
+// Delete a customer
+router.delete('/customer/:id', async (req, res, next) => {
+    try {
+        const result = await firebaseModel.deleteCustomer(req.params.id);
+        if (!result) return res.sendStatus(409);
+        return res.status(200).json(result);
     }
     catch (e) {
         return next(e);
@@ -122,7 +157,7 @@ router.put('/user/:uid', async (req, res, next) => {
     }
 });
 
-// Delete a product
+// Delete a user
 router.delete('/user/:id', async (req, res, next) => {
     try {
         const result = await firebaseModel.deleteUser(req.params.id);

@@ -63,6 +63,27 @@ export class ApiService {
   }
 
 
+  // Customers
+  getCustomers() {
+    return this.get(`customer`);
+  }
+
+  getCustomer(id: string) {
+    return this.get(`customer/${id}`);
+  }
+
+  addCustomer(customer: any) {
+    return this.post('customer', customer);
+  }
+
+  updateCustomer(customer: any) {
+    return this.put('customer', customer.uid, customer);
+  }
+
+  deleteCustomer(uid: any) {
+    return this.delete('customer', uid);
+  }
+
   // Products
   getProducts() {
     return this.get(`product`);

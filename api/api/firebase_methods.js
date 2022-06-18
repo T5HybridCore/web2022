@@ -22,11 +22,35 @@ class FirebaseMethods {
         this.auth = getAuth();
     }
 
-    // Sign in
-    async signIn(body) {
-        const result = await this.db.collection(collection).add(body);
-        body.id = body.id;
-        return body;
+    // Get customers
+    async getCustomers() {
+        const result = await this.auth.listUsers();
+
+        const list = [];
+        result.users.forEach((user) => {
+            if (!user.customClaims) list.push(user);
+        });
+
+        return list.length ? list : null;
+    }
+
+    // Add customer
+    async addCustomer(customer) {
+        const result = await this.auth.createUser(customer);
+        var uid = result.uid;
+        return { uid };
+    }
+
+    async updateCustomer(uid, customer) {
+        const result = await this.auth.updateUser(uid, customer);
+        var uid = result.uid;
+        return { uid };
+    }
+
+    async deleteCustomer(uid) {
+        await this.auth.deleteUser(uid);
+        var code = '1';
+        return { code };
     }
 
     // Get users

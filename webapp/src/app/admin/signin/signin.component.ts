@@ -1,7 +1,10 @@
-import { Component, OnDestroy, OnInit, Optional } from '@angular/core';
-import { Auth, authState, signInAnonymously, signOut, User, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from '@angular/fire/auth';
-import { EMPTY, Observable, Subscription } from 'rxjs';
-import { ApiService } from 'src/app/shared/services/api.service';
+import { Component, OnDestroy, OnInit, Optional, ViewChild } from '@angular/core';
+import { Auth, authState, User, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { traceUntilFirst } from '@angular/fire/performance';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+import { EMPTY, map, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-signin',
@@ -12,49 +15,51 @@ export class SigninComponent implements OnInit, OnDestroy {
   // Properties
   title = 'Sign in';
 
-  //private readonly userDisposable: Subscription | undefined;
+  // View
+  @ViewChild('wrongData')
+  public readonly wrongData!: SwalComponent;
+
+  // Attributes
+  private readonly userDisposable: Subscription | undefined;
   public readonly user: Observable<User | null> = EMPTY;
 
-  showLoginButton = true;
-  showLogoutButton = true;
+  // Form
+  form: FormGroup;
 
-  constructor(@Optional() private auth: Auth, private apiService: ApiService) {
+  constructor(@Optional() private auth: Auth, private router: Router) {
     if (auth) {
-      //this.user = authState(this.auth);
-      /*this.userDisposable = authState(this.auth).pipe(
+      this.user = authState(this.auth);
+
+      this.userDisposable = authState(this.auth).pipe(
         traceUntilFirst('auth'),
         map(u => !!u)
       ).subscribe(isLoggedIn => {
-        this.showLoginButton = !isLoggedIn;
-        this.showLogoutButton = isLoggedIn;
-      });*/
+        if (isLoggedIn) router.navigate(['/admin']);
+      });
     }
-  }
 
-  ngOnInit(): void {
-    this.apiService.getRecipes().subscribe((result: any) => {
-      console.log(result);      
+    // Form
+    this.form = new FormGroup({
+      'email': new FormControl('', Validators.required),
+      'password': new FormControl('', Validators.required)
     });
   }
 
+  ngOnInit(): void { }
+
   ngOnDestroy(): void {
-    /*if (this.userDisposable) {
+    if (this.userDisposable) {
       this.userDisposable.unsubscribe();
-    }*/
+    }
   }
 
   async login() {
-    //const result = await signInWithPopup(this.auth, new GoogleAuthProvider());
-    const result = await signInWithEmailAndPassword(this.auth, 'T5HybridCore@gmail.com', 'Test123.');
-    console.log(result);
-    
-  }
-
-  async loginAnonymously() {
-    return await signInAnonymously(this.auth);
-  }
-
-  async logout() {
-    return await signOut(this.auth);
+    await signInWithEmailAndPassword(this.auth, this.form.value['email'], this.form.value['password'])
+      .then((user) => {
+        this.router.navigate(['/admin']);
+      })
+      .catch(async (error) => {
+        await this.wrongData.fire();        
+      });
   }
 }

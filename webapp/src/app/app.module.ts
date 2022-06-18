@@ -64,8 +64,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     HeaderComponent,
     SigninComponent,
     UsersComponent,
-    GraphComponent,
-    NgApexchartsModule
+    GraphComponent
   ],
   imports: [
     BrowserModule,
@@ -75,6 +74,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     HttpClientModule,
     SweetAlert2Module.forRoot(),
     QRCodeModule,
+    NgApexchartsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth())
   ],

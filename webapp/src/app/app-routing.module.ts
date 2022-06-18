@@ -42,7 +42,7 @@ const routes: Routes = [
 {path: 'admin/orders', component: OrdersComponent},
 {path: 'admin/users', component: UsersComponent},
 {path: 'admin/reports', component: ReportsComponent},
-{path: 'admin/sigin', component: SigninComponent},
+{path: 'admin/signin', component: SigninComponent},
 
 {path: '**', pathMatch: 'full', redirectTo: 'home'}
 
