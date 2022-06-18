@@ -1,25 +1,23 @@
-
 <div class="card-deck">
-  <ng-container *ngFor="let item of items"> 
-       
+  <ng-container *ngFor="let item of items">
     <div class="card">
-      
-      <img class="card-img-top" src={{item.picture}}   alt="Card image cap">
+      <img class="card-img-top" src="{{ item.picture }}" alt="Card image cap" />
       <div class="card-body">
-
-        <div (click)="seeProduct( item )" class="cardpuntero" *ngIf="showCard(item)"> 
-          <p>Product: {{item.title}} </p>
-        </div>  
+        <div
+          (click)="seeProduct(item)"
+          class="cardpuntero"
+          *ngIf="showCard(item)"
+        >
+          <p>Product: {{ item.title }}</p>
+        </div>
         <div class="card-footer">
-          <small>            Category: {{item.category }} <br>
-            Manufacturer: {{item.manufacturer }} <br>            
-            <b> Price: {{item.price |currency }} </b> <br>
+          <small>
+            Category: {{ item.category }} <br />
+            Manufacturer: {{ item.manufacturer }} <br />
+            <b> Price: {{ item.price | currency }} </b> <br />
           </small>
-        </div>              
-          
-              
+        </div>
       </div>
-             
     </div>
-  </ng-container>   
+  </ng-container>
 </div>
