@@ -6,10 +6,10 @@
     <app-sidebar></app-sidebar>
 </ng-template>
 
-<main [ngClass]="{'main-wrapper': isAdmin}">
-    <app-header></app-header>
+<main [ngClass]="{'main-wrapper': isAdmin, 'mt-30': !isAdmin}">
+    <app-header *ngIf="isAdmin"></app-header>
     <div class="container-fluid" [ngClass]="{'container': !isAdmin}">
-        <app-pagetitle [title]="title" [path]="url"></app-pagetitle>
+        <app-pagetitle [title]="title" [path]="url" *ngIf="isAdmin"></app-pagetitle>
         <router-outlet (activate)="onActivated($event)"></router-outlet>
     </div>
 </main>

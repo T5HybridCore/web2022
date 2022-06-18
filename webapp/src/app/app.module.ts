@@ -66,11 +66,8 @@ import { QRCodeModule } from 'angularx-qrcode';
     FormsModule, 
     ReactiveFormsModule,
     HttpClientModule,
-<<<<<<< HEAD
-    SweetAlert2Module.forRoot()
-=======
+    SweetAlert2Module.forRoot(),
     QRCodeModule
->>>>>>> 154bd3f14c9df219705a250d5d4ad41c38afff0e
   ],
   providers: [],
   bootstrap: [AppComponent]

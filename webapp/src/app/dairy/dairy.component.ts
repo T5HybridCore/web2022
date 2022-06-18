@@ -16,7 +16,7 @@ export class DairyComponent implements OnInit {
     console.log('search');
     this.flag = true;
 
-    this.api.getAllProducts().subscribe((data: any) => {
+    this.api.getProducts().subscribe((data: any) => {
       console.log('search this api gets');
       this.products = data;
       console.log('this.products ' + this.products);
