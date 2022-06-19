@@ -1,0 +1,17 @@
+.spacer {
+    height: 10%;
+  }
+
+  .btn-circle.btn-md {
+    width: 30px;
+    height: 30px;
+    padding: 7px 10px;
+    border-radius: 25px;
+    font-size: 10px;
+    text-align: center;
+}
+
+.h5{
+  background-color: #e3f2fd;
+  size: 50;
+}
