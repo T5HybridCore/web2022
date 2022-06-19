@@ -5,8 +5,8 @@ class FirebaseMethods {
         // New instance
         FirebaseMethods.instance = this;
 
-        const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
-        const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
+        const { initializeApp, cert } = require('firebase-admin/app');
+        const { getFirestore } = require('firebase-admin/firestore');
         const { getAuth } = require('firebase-admin/auth');
 
         // Service Account
@@ -44,6 +44,10 @@ class FirebaseMethods {
     async addCustomer(customer) {
         const result = await this.auth.createUser(customer);
         var uid = result.uid;
+
+        // Create cart
+        const r = this.db.collection('cart').doc(uid).set({'products': []});
+
         return { uid };
     }
 
@@ -94,7 +98,7 @@ class FirebaseMethods {
 
     // Get
     async get(collection) {
-        const result = await this.db.collection(collection).orderBy('title').get();
+        const result = await this.db.collection(collection).get();
 
         const list = [];
         result.forEach((doc) => {

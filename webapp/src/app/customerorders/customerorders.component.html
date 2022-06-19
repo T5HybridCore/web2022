@@ -1,0 +1,63 @@
+<div class="card-style mb-30">
+    <div class="d-flex">
+        <div class="flex-grow-1">
+            <h6 class="mb-10">Orders ({{orders?.length}})</h6>
+            <p class="text-sm mb-20">
+                List of my orders
+            </p>
+        </div>
+    </div>
+    <app-animation mode="table" [ngClass]="{'visually-hidden': orders}"></app-animation>
+    <h2 class="text-center mt-40 mb-30" *ngIf="!orders || !orders?.length">The order list is empty <i
+            class="bi bi-emoji-frown text-danger"></i></h2>
+    <div class="table-wrapper table-responsive" [ngClass]="{'visually-hidden': !orders || !orders.length}">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <h6>#</h6>
+                    </th>
+                    <th>
+                        <h6>Product(s)</h6>
+                    </th>
+                    <th>
+                        <h6>Quantity</h6>
+                    </th>
+                    <th>
+                        <h6>Total</h6>
+                    </th>
+                    <th>
+                        <h6>Status</h6>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of orders; let i = index">
+                    <td class="min-width">
+                        <p>{{i + 1}}</p>
+                    </td>
+                    <td class="min-width">
+                        <p>{{item.productNames}}</p>
+                    </td>
+                    <td class="min-width">
+                        <p>{{item.quantity}}</p>
+                    </td>
+                    <td class="min-width">
+                        <p>{{item.total | currency}}</p>
+                    </td>
+                    <td class="min-width">
+                        <div *ngIf="item.status === 0">
+                            <span class="status-btn close-btn">Ordered</span>
+                        </div>
+                        <div *ngIf="item.status === 1">
+                            <span class="status-btn active-btn">Sent</span>
+                        </div>
+                        <div *ngIf="item.status === 2">
+                            <span class="status-btn success-btn">Delivered</span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

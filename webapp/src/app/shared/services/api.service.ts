@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { end } from '@popperjs/core';
 
 @Injectable({
   providedIn: 'root'
@@ -22,12 +21,12 @@ export class ApiService {
   }
 
   private post(endpoint: string, body: string) {
-    var b = endpoint === 'product' ? this.productToJson(body) : endpoint === 'user' ? this.userToJson(body) : body;
+    var b = endpoint === 'product' ? this.productToJson(body) : endpoint === 'user' ? this.userToJson(body) : endpoint === 'cart' ? this.cartToJson(body) : body;
     return this.httpClient.post(`${this.url}${endpoint}`, b);
   }
 
   private put(endpoint: string, id: string, body: string) {
-    var b = endpoint === 'product' ? this.productToJson(body) : endpoint === 'user' ? this.userToJson(body) : body
+    var b = endpoint === 'product' ? this.productToJson(body) : endpoint === 'user' ? this.userToJson(body) : endpoint === 'cart' ? this.cartToJson(body) : body;
     return this.httpClient.put(`${this.url}${endpoint}/${id}`, b);
   }
 
@@ -36,6 +35,12 @@ export class ApiService {
   }
 
   // Utils
+  private cartToJson(cart: any) {
+    return {
+      'products': cart.products
+    };
+  }
+
   private productToJson(product: any): any {
     return {
       'title': product.title,
@@ -54,14 +59,23 @@ export class ApiService {
   private userToJson(user: any): any {
     return {
       'email': user.email,
-      ...(user.password) && {'password': user.password},
+      ...(user.password) && { 'password': user.password },
       'displayName': user.displayName,
       'photoURL': user.photoURL,
-      'phoneNumber': '+52' + user.phoneNumber,
+      ...(user.phoneNumber) && { 'phoneNumber': '+52' + user.phoneNumber },
       'disabled': user.disabled === 'true'
     };
   }
 
+
+  // Cart
+  getCart(uid: string) {
+    return this.get(`cart/${uid}`);
+  }
+
+  addToCart(cart: any) {
+    return this.put(`cart`, cart.id, cart);
+  }
 
   // Customers
   getCustomers() {
@@ -82,6 +96,27 @@ export class ApiService {
 
   deleteCustomer(uid: any) {
     return this.delete('customer', uid);
+  }
+
+  // Orders
+  getOrders() {
+    return this.get(`order`);
+  }
+
+  getOrder(id: string) {
+    return this.get(`order/${id}`);
+  }
+
+  addOrder(order: any) {
+    return this.post('order', order);
+  }
+
+  updateOrder(order: any) {
+    return this.put('order', order.id, order);
+  }
+
+  deleteOrder(id: any) {
+    return this.delete('order', id);
   }
 
   // Products

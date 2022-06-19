@@ -37,6 +37,8 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { GraphComponent } from './graph/graph.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { LoginComponent } from './login/login.component';
+import { CustomerordersComponent } from './customerorders/customerorders.component';
+import { JoinPipe } from './shared/join.pipe';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,9 @@ import { LoginComponent } from './login/login.component';
     SigninComponent,
     UsersComponent,
     GraphComponent,
-    LoginComponent
+    LoginComponent,
+    CustomerordersComponent,
+    JoinPipe
   ],
   imports: [
     BrowserModule,

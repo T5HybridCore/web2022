@@ -14,11 +14,7 @@
         </div>
 
         <div class="qr">
-          <qrcode
-            *ngIf="flag_qr === true"
-            [qrdata]="urls[random].url"
-            [errorCorrectionLevel]="'M'"
-          ></qrcode>
+          <qrcode *ngIf="flag_qr === true" [qrdata]="urls[random].url" [errorCorrectionLevel]="'M'"></qrcode>
         </div>
       </div>
 
@@ -45,21 +41,11 @@
               Price: {{ product.price | currency }}
             </li>
           </ul>
-          <div class="card-body">
-            
-            <input
-            name="amount_input"
-            [(ngModel)]="amount" 
-            #name="ngModel"
-              type="number"
-              class="form-control"
-              
-              min="1"
-              max="99"
-              required
-            />
+          <div class="card-body" *ngIf="(user | async)">
+            <input name="amount_input" [(ngModel)]="amount" #name="ngModel" type="number" class="form-control" min="1"
+              max="99" required />
             <span class="validity"></span>
-            <button class="btn btn-success" *ngIf="!name.invalid"  (click)="addProduct_tocart_byid(name.value)">
+            <button class="btn btn-success" *ngIf="!name.invalid" (click)="addProduct_tocart_byid(name.value)">
               Add To Cart
             </button>
           </div>
@@ -68,3 +54,5 @@
     </div>
   </div>
 </div>
+
+<swal #added title="Added to cart" text="The product was added to your cart" icon="success"></swal>

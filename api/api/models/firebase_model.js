@@ -3,6 +3,7 @@ const firebase_methods = require('../firebase_methods');
 // Singleton design pattern
 class FirebaseModel {
     cartCollection = 'cart';
+    orderCollection = 'orders';
     productCollection = 'products';
     recipesCollection = 'recipes';
 
@@ -15,7 +16,6 @@ class FirebaseModel {
 
     // Cart
     getCart(id) { return firebase_methods.getById(this.cartCollection, id); }
-    addCart(cart) { return firebase_methods.getById(this.cartCollection); }
     updateCart(id, cart) { return firebase_methods.update(this.cartCollection, id, cart); }
 
     // Customers
@@ -24,6 +24,13 @@ class FirebaseModel {
     addCustomer(customer) { return firebase_methods.addCustomer(customer); }
     updateCustomer(uid, customer) { return firebase_methods.updateCustomer(uid, customer); }
     deleteCustomer(uid) { return firebase_methods.deleteCustomer(uid); }
+
+    // Orders
+    getOrders() { return firebase_methods.get(this.orderCollection); }
+    getOrder(id) { return firebase_methods.getById(this.orderCollection, id); }
+    addOrder(order) { return firebase_methods.post(this.orderCollection, order); }
+    updateOrder(id, order) { return firebase_methods.update(this.orderCollection, id, order); }
+    deleteOrder(id) { return firebase_methods.delete(this.orderCollection, id); }
 
     // Products
     getProducts() { return firebase_methods.get(this.productCollection); }

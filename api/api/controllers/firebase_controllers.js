@@ -3,6 +3,30 @@ const url = require('url');
 const router = express.Router();
 const firebaseModel = require('../models/firebase_model');
 
+// Get cart
+router.get('/cart/:id', async (req, res, next) => {
+    try {
+        const result = await firebaseModel.getCart(req.params.id);
+        if (!result) return res.sendStatus(404);
+        return res.json(result);
+    }
+    catch (e) {
+        return next(e);
+    }
+});
+
+// Update cart
+router.put('/cart/:id', async (req, res, next) => {
+    try {
+        const result = await firebaseModel.updateCart(req.params.id, req.body);
+        if (!result) return res.sendStatus(409);
+        return res.status(200).json(result);
+    }
+    catch (e) {
+        return next(e);
+    }
+});
+
 // Get all customers
 router.get('/customer', async (req, res, next) => {
     try {
@@ -113,6 +137,65 @@ router.put('/product/:id', async (req, res, next) => {
 router.delete('/product/:id', async (req, res, next) => {
     try {
         const result = await firebaseModel.deleteProduct(req.params.id);
+        if (!result) return res.sendStatus(409);
+        return res.status(200).json(result);
+    }
+    catch (e) {
+        return next(e);
+    }
+});
+
+// Get all orders
+router.get('/order', async (req, res, next) => {
+    try {
+        const result = await firebaseModel.getOrders();
+        return res.json(result);
+    }
+    catch (e) {
+        return next(e);
+    }
+});
+
+// Get one order
+router.get('/order/:id', async (req, res, next) => {
+    try {
+        const result = await firebaseModel.getOrder(req.params.id);
+        if (!result) return res.sendStatus(404);
+        return res.json(result);
+    }
+    catch (e) {
+        return next(e);
+    }
+});
+
+// Add a new order
+router.post('/order', async (req, res, next) => {
+    try {
+        const result = await firebaseModel.addOrder(req.body);
+        if (!result) return res.sendStatus(409);
+        return res.status(201).json(result);
+    }
+    catch (e) {
+        return next(e);
+    }
+});
+
+// Update a order
+router.put('/order/:id', async (req, res, next) => {
+    try {
+        const result = await firebaseModel.updateOrder(req.params.id, req.body);
+        if (!result) return res.sendStatus(409);
+        return res.status(200).json(result);
+    }
+    catch (e) {
+        return next(e);
+    }
+});
+
+// Delete a order
+router.delete('/order/:id', async (req, res, next) => {
+    try {
+        const result = await firebaseModel.deleteOrder(req.params.id);
         if (!result) return res.sendStatus(409);
         return res.status(200).json(result);
     }
