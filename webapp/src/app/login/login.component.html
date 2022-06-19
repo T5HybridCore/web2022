@@ -1,0 +1,56 @@
+<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ModalForm">
+    Launch Modal Form
+  </button>
+
+<div class="modal fade " id="ModalForm" tabindex="-1" aria-labelledby="ModalFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="text-center" style="color:white">Login</h1>
+            </div>
+            <div class="modal-body">
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="myform bg-dark">
+                    <form [formGroup]="form" (ngSubmit)="closeModal()" class="needs-validation" novalidate></form>
+                    <form>
+                        <div class="mb-3 mt-4">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <button type="submit" class="btn btn-light mt-3">LOGIN</button>
+                        <p>Not a member? <a href="#">Signup now</a></p>
+                        <!-- 
+                        <div class="form-group row">
+                            <label class="col-2 col-form-label">Email</label>
+                            <div class="col-8">
+                                <input class="form-control" type="text" placeholder="Email" formControlName="email" [ngClass]="{'is-invalid':!forma.get('email')?.valid }">
+                                <div *ngIf="forma.controls['email'].errors?.['required']" class="invalid-feedback">
+                                    Required field
+                                </div>
+                                <div *ngIf="forma.controls['email'].errors?.['email']" class="invalid-feedback">
+                                    Incorrect format
+                                </div>
+                            </div>
+                        </div> -->
+                        <!--  <div class="form-group row">
+                            <label class="col-3 col-form-label">Password</label>
+                            <div class="col-8">
+                                <input class="form-control" type="password" placeholder="Password" formControlName="password" [ngClass]="{'is-invalid':!forma.get('password')?.valid }">
+                                <div *ngIf="forma.controls['password'].errors?.['required']" class="invalid-feedback">
+                                    Required field
+                                </div>
+                                <div *ngIf="forma.controls['password'].errors?.['required']" class="invalid-feedback">
+                                    3 characters at least
+                                </div>
+                            </div>
+                        </div> -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

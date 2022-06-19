@@ -36,6 +36,7 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { GraphComponent } from './graph/graph.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -64,10 +65,11 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     HeaderComponent,
     SigninComponent,
     UsersComponent,
-    GraphComponent
+    GraphComponent,
+    LoginComponent
   ],
   imports: [
-    BrowserModule,
+     BrowserModule,
     AppRoutingModule,
     FormsModule, 
     ReactiveFormsModule,
