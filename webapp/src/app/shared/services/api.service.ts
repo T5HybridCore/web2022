@@ -68,8 +68,8 @@ export class ApiService {
     return this.get(`customer`);
   }
 
-  getCustomer(id: string) {
-    return this.get(`customer/${id}`);
+  getCustomer(uid: string) {
+    return this.get(`customer/${uid}`);
   }
 
   addCustomer(customer: any) {
