@@ -1,4 +1,4 @@
-<div *ngIf="!isAdmin; else admin">
+<div *ngIf="!isAdmin && showNavbar else admin">
     <app-navbar></app-navbar>
 </div>
 
@@ -8,7 +8,7 @@
 
 <main [ngClass]="{'main-wrapper': isAdmin && showSidebar, 'mt-30': !isAdmin}">
     <app-header *ngIf="isAdmin && showSidebar"></app-header>
-    <div class="container-fluid" [ngClass]="{'container': !isAdmin}">
+    <div class="container-fluid"> <!-- [ngClass]="{'container': !isAdmin}" -->
         <app-pagetitle [title]="title" [path]="url" *ngIf="isAdmin"></app-pagetitle>
         <router-outlet (activate)="onActivated($event)"></router-outlet>
     </div>

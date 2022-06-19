@@ -87,6 +87,8 @@ export class CustomersComponent implements OnInit {
 
     // On update/new
     if (!this.isNew) {
+      if (!customer['phoneNumber']) customer['phoneNumber'] = '';
+      if (!customer['photoURL']) customer['photoURL'] = '';
       this.form.setValue(customer);
     } else {
       this.form.controls['password'].addValidators(Validators.required);

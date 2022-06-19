@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Alegreya|Arima+Madurai|Dancing+Script|Dosis|Merriweather|Oleo+Script|Overlock|PT+Serif|Pacifico|Playball|Playfair+Display|Share|Unica+One|Vibur");
 /* End Fonts */
 /* Start Global rules */
-* {
+/** {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -104,7 +104,7 @@ button {
 button:hover {
   transform: translatey(3px);
   box-shadow: none;
-  /*font-weight: bolder;*/
+  font-weight: bolder;
 }
 
 button:hover {
@@ -118,3 +118,4 @@ button:hover {
     transform: translateY(5px);
   }
 }
+*/

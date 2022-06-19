@@ -31,9 +31,9 @@ import { HeaderComponent } from './admin/header/header.component';
 import { SigninComponent } from './admin/signin/signin.component';
 import { UsersComponent } from './admin/users/users.component';
 import { QRCodeModule } from 'angularx-qrcode';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 import { GraphComponent } from './graph/graph.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { LoginComponent } from './login/login.component';
@@ -69,9 +69,9 @@ import { LoginComponent } from './login/login.component';
     LoginComponent
   ],
   imports: [
-     BrowserModule,
+    BrowserModule,
     AppRoutingModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     SweetAlert2Module.forRoot(),

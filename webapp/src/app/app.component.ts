@@ -10,6 +10,7 @@ import { ProductsComponent } from './admin/products/products.component';
 import { ReportsComponent } from './admin/reports/reports.component';
 import { SigninComponent } from './admin/signin/signin.component';
 import { UsersComponent } from './admin/users/users.component';
+import { SignupComponent } from './signup/signup.component';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit, OnDestroy {
   isAdmin: boolean = false;
   title: string = '';
   url: string = '';
+  showNavbar: boolean = true;
   showSidebar: boolean = false;
   loggedIn: boolean = false;
 
@@ -70,6 +72,6 @@ export class AppComponent implements OnInit, OnDestroy {
       }
       
       this.showSidebar = !(component instanceof SigninComponent);
-    }
+    } else if(component instanceof SignupComponent) this.showNavbar = false;
   }
 }

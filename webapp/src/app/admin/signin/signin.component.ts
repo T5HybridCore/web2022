@@ -56,7 +56,7 @@ export class SigninComponent implements OnInit, OnDestroy {
   async login() {
     await signInWithEmailAndPassword(this.auth, this.form.value['email'], this.form.value['password'])
       .then((user) => {
-        this.router.navigate(['/admin']);
+        //this.router.navigate(['/admin']);
       })
       .catch(async (error) => {
         await this.wrongData.fire();        
