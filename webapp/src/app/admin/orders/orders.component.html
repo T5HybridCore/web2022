@@ -1,1 +1,129 @@
-<p>orders works!</p>
+<div class="card-style mb-30">
+    <div class="d-flex">
+        <div class="flex-grow-1">
+            <h6 class="mb-10">All orders ({{orders?.length}})</h6>
+            <p class="text-sm mb-20">
+                List of all orders
+            </p>
+        </div>
+    </div>
+    <app-animation mode="table" [ngClass]="{'visually-hidden': orders}"></app-animation>
+    <div class="table-wrapper table-responsive" [ngClass]="{'visually-hidden': !orders}">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <h6>#</h6>
+                    </th>
+                    <th>
+                        <h6>Customer</h6>
+                    </th>
+                    <th>
+                        <h6>Date</h6>
+                    </th>
+                    <th>
+                        <h6>Products</h6>
+                    </th>
+                    <th>
+                        <h6>Total</h6>
+                    </th>
+                    <th>
+                        <h6>Status</h6>
+                    </th>
+                    <th>
+                        <h6>Action</h6>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of orders; let i = index">
+                    <td class="min-width">
+                        {{i + 1}}
+                    </td>
+                    <td class="min-width">
+                        <p>{{order.customerName}}</p>
+                    </td>
+                    <td class="min-width">
+                        <p>{{order.date | date:'short'}}</p>
+                    </td>
+                    <td class="min-width">
+                        <p>{{order.productsSize}}</p>
+                    </td>
+                    <td class="min-width">
+                        <p>{{order.total | currency}}</p>
+                    </td>
+                    <td class="min-width">
+                        <div *ngIf="order.status === 0">
+                            <span class="status-btn close-btn">Ordered</span>
+                        </div>
+                        <div *ngIf="order.status === 1">
+                            <span class="status-btn active-btn">Sent</span>
+                        </div>
+                        <div *ngIf="order.status === 2">
+                            <span class="status-btn success-btn">Delivered</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="action">
+                            <button class="text-primary" (click)="openModal(order)">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button class="text-danger"
+                                [swal]="{ title: 'Are you sure you want to delete the order \'' + (i + 1) + '\'?', confirmButtonText: 'Yes', showCancelButton: true, cancelButtonText: 'No' }"
+                                (confirm)="deleteOrder(order.id)">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="orderModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content card-style">
+            <div class="modal-header">
+                <h5 class="modal-title" id="orderModalTitle">Edit order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form" (ngSubmit)="closeModal()" class="needs-validation" novalidate>
+                    <div class="visually-hidden">
+                        <input type="text" placeholder="id..." formControlName="id">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="select-style-1">
+                                <label>Status</label>
+                                <div class="select-position">
+                                    <select formControlName="status"
+                                        [ngClass]="{'is-invalid':!form.get('status')?.valid}">
+                                        <option value="">Select an option</option>
+                                        <option value="0">Ordered</option>
+                                        <option value="1">Sent</option>
+                                        <option value="2">Delivered</option>
+                                    </select>
+                                    <div *ngIf="form.controls['status'].errors?.['required']" class="invalid-feedback">
+                                        * Field required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="action d-flex flex-wrap justify-content-end">
+                        <button type="submit" class="main-btn primary-btn square-btn btn-hover m-1"
+                            [disabled]="form.invalid">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>-->
+    </div>
+</div>
+
+<swal #orderUpdated title="Order successfully updated" icon="success"></swal>

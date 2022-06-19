@@ -1,99 +1,82 @@
-<nav class="navbar navbar-expand-lg navbar-light gradient" style="background-color: #e3f2fd;">
-    <!--  style=" background-color: #e3f2fd; " -->
+<nav class="navbar navbar-expand-lg navbar-light gradient">
     <div class="container-fluid ">
-        <a class="navbar-brand d-none d-lg-block " href="#" [routerLink]="['/home']">
-            <img src="https://i.ibb.co/XLYbGNT/logo.png" alt="logo" width="35" height="42"
-                class="d-inline-block align-text-top">
-            <p style="display:inline" class="titulo">Super-duper</p>
+        <a class="navbar-brand" [routerLink]="'/home'">
+            <img src="https://firebasestorage.googleapis.com/v0/b/web-2022-f5262.appspot.com/o/logo.png?alt=media&token=46c212fa-4792-443a-b0c2-2ecc4bc2adc2"
+                alt="" width="30" height="24" class="d-inline-block align-text-top">
+            Super-duper
         </a>
-        <a class="navbar-brand d-lg-none" href="#" [routerLink]="['/home']">
-            <img src="https://i.ibb.co/XLYbGNT/logo.png" alt="logo" width="30" height="35.27"
-                class="d-inline-block align-text-top">
-        </a>
-
-        <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation ">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse order-3 order-lg-2" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Account
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li>
-                            <a class="nav-link dropdown-item" style="color: #000; font-weight: bold"
-                                (click)="openModal()">Login</a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li><a class="dropdown-item" href="#" [routerLink]="['/signup']">Sign up</a></li>
-                        <!-- <li>
-                            <a class="dropdown-item" href="#"></a>
-                        </li> -->
+                        <li><a class="dropdown-item" (click)="openModal()" role="button">Sign in</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['/signup']">Sign up</a></li>
                     </ul>
                 </li>
-                <!-- <li class="nav-item ">
-                    <a class="nav-link active " aria-current="page " href="# ">Home</a>
-                </li>
-
-                <li class="nav-item ">
-                    <a class="nav-link disabled ">Disabled</a>
-                </li> -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Departments
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="#" [routerLink]="['/fruits']">Fruits</a></li>
-                        <li><a class="dropdown-item" href="#" [routerLink]="['/vegetables']">Vegetables</a></li>
-                        <li><a class="dropdown-item" href="#" [routerLink]="['/dairy']">Dairy</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['/fruits']">Fruits</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['/vegetables']">Vegetables</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['/dairy']">Dairy</a></li>
                     </ul>
                 </li>
             </ul>
-        </div>
-
-        <div class="d-flex flex-row order-2 order-lg-3">
-            <a class="navbar-brand" href="#" [routerLink]="['/mycart'] ">
-                <img src="https://i.ibb.co/FwZCFZq/carrito.png" alt="" width="40" height="33" class="d-inline-block">
-            </a>
-            <div class="col-lg-7 col-md-7 col-6 bg-primary-500">
-                <div class="header-right">
-                    <div class="profile-box ml-15">
-                        <button class="dropdown-toggle bg-transparent border-0" type="button" id="profile"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="profile-info">
-                                <div class="info">
-                                    <h6>{{(user | async)?.displayName}}</h6>
-                                    <div class="image">
-                                        <img [src]="(user | async)?.photoURL" alt="">
-                                        <span class="status"></span>
+            <form class="d-flex container-fluid justify-content-start">
+                <a class="ms-auto" [routerLink]="['/mycart'] ">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/web-2022-f5262.appspot.com/o/cart.png?alt=media&token=ed6f89e4-4e6c-4575-b45b-e2e03357ad46"
+                        alt="" width="35" height="35" class="d-inline-block">
+                </a>
+                <div class="header p-0" style="background-color: transparent;" *ngIf="loggedIn">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <div class="header-right">
+                                    <div class="profile-box ml-15">
+                                        <button class="dropdown-toggle bg-transparent border-0" type="button"
+                                            id="profile" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <div class="profile-info">
+                                                <div class="info">
+                                                    <h6>{{(user | async)?.displayName}}</h6>
+                                                    <div class="image">
+                                                        <img [src]="(user | async)?.photoURL" alt="">
+                                                        <span class="status"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <i class="bi bi-chevron-down"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end mt-0" aria-labelledby="profile">
+                                            <li>
+                                                <a [routerLink]="'/orders'">
+                                                    <i class="bi bi-list"></i> Orders
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a (click)="logout()" role="button"><i class="bi bi-box-arrow-left"></i>
+                                                    Sign Out</a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                            <i class="bi bi-chevron-down"></i>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
-                            <li>
-                                <a [routerLink]="'/orders'">
-                                    <i class="bi bi-list"></i> Orders
-                                </a>
-                            </li>
-                            <li>
-                                <a (click)="logout()" role="button"><i class="bi bi-box-arrow-left"></i> Sign Out</a>
-                            </li>
-                        </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
-
 </nav>
 
 <!-- Boton flotante-->
@@ -116,7 +99,8 @@
 
     <div class="sub-button shadow ">
         <a href="#" [routerLink]="['/question']">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdIVj-nbM4REcyJpkKD7FYMGRi5CpjhEN-ZQ&usqp=CAU" alt="" width="40">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdIVj-nbM4REcyJpkKD7FYMGRi5CpjhEN-ZQ&usqp=CAU"
+                alt="" width="40">
         </a>
     </div>
 </div>

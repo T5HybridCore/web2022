@@ -26,7 +26,7 @@ export class ApiService {
   }
 
   private put(endpoint: string, id: string, body: string) {
-    var b = endpoint === 'product' ? this.productToJson(body) : endpoint === 'user' ? this.userToJson(body) : endpoint === 'cart' ? this.cartToJson(body) : body;
+    var b = endpoint === 'product' ? this.productToJson(body) : endpoint === 'user' ? this.userToJson(body) : endpoint === 'cart' ? this.cartToJson(body) : endpoint === 'order' ? this.orderToJson(body) : body;
     return this.httpClient.put(`${this.url}${endpoint}/${id}`, b);
   }
 
@@ -56,6 +56,16 @@ export class ApiService {
     };
   }
 
+  private orderToJson(order: any): any {
+    return {
+      'id': order.id,
+      'customer': order.customer,
+      'date': order.date,
+      'products': order.products,
+      'status': parseInt(order.status)
+    };
+  }
+
   private userToJson(user: any): any {
     return {
       'email': user.email,
@@ -65,6 +75,11 @@ export class ApiService {
       ...(user.phoneNumber) && { 'phoneNumber': '+52' + user.phoneNumber },
       'disabled': user.disabled === 'true'
     };
+  }
+
+  // Question
+  sendQuestion(question: any) {
+    return this.post(`question`, question);
   }
 
 

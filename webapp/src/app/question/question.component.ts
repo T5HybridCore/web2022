@@ -1,10 +1,7 @@
-import { Component, OnDestroy, OnInit, Optional, ViewChild } from '@angular/core';
-import { Auth, authState, User, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
-import { traceUntilFirst } from '@angular/fire/performance';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
-import { EMPTY, map, Observable, Subscription } from 'rxjs';
 import { ApiService } from '../shared/services/api.service';
 
 @Component({
@@ -13,63 +10,35 @@ import { ApiService } from '../shared/services/api.service';
   styleUrls: ['./question.component.css']
 })
 export class QuestionComponent implements OnInit {
-
   // View
-  @ViewChild('wrongData')
-  public readonly wrongData!: SwalComponent;
+  @ViewChild('emailSent')
+  public readonly emailSent!: SwalComponent;
 
-    // Attributes
-    private readonly userDisposable: Subscription | undefined;
-    public readonly user: Observable<User | null> = EMPTY;
-
+  // Form
   form: FormGroup;
 
-  
-constructor( @Optional() private auth: Auth, private apiService: ApiService, private router: Router) {
-  if (auth) {
-    this.user = authState(this.auth);
-
-    this.userDisposable = authState(this.auth).pipe(
-      traceUntilFirst('auth'),
-      map(u => !!u)
-    ).subscribe(isLoggedIn => {        
-      if (isLoggedIn) {
-        apiService.getCustomer(auth.currentUser?.uid ?? '').subscribe(async (user: any) => {
-          if (user.customClaims && user.customClaims['admin']) {
-            await this.wrongData.fire();
-            await signOut(this.auth);
-          }
-        });
-        //router.navigate(['/admin']);
-      }
+  constructor(private apiService: ApiService, private router: Router) {
+    // Form
+    this.form = new FormGroup({
+      'email': new FormControl('', [Validators.required, Validators.email]),
+      'name': new FormControl('', [Validators.required, Validators.minLength(3)]),
+      'question': new FormControl('', [Validators.required, Validators.minLength(10)])
     });
   }
 
-      // Form
-      this.form = new FormGroup({
-        'email': new FormControl('', Validators.required),
-        'password': new FormControl('', Validators.required),
-        'question': new FormControl('', Validators.required)
-      });
-}
+  ngOnInit() { }
 
-    ngOnInit() {
-     
-    }
- 
+  async question() {
+    var q = {
+      'name': this.form.value['name'],
+      'contactEmail': this.form.value['email'],
+      'question': this.form.value['question'],
+      'date': new Date()
+    };
 
-    async question() {
-
-      //aqui va la funcion que manda el mensaje por nodejs al email del sitio
-      /*await sendquestion(this.auth, this.form.value['question'], this.form.value['email'], this.form.value['password'])
-        .then((user) => {
-          
-        })
-        .catch(async (error) => {
-          await this.wrongData.fire();        
-        }); 
-        
-        */
-    }
+    this.apiService.sendQuestion(q).subscribe(async result => {
+      await this.emailSent.fire();
+    });
+  }
 
 }

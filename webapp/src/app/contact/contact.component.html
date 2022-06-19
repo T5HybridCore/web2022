@@ -1,24 +1,31 @@
+<div class="card-style mb-30">
+    <div class="d-flex">
+        <div id="a1" class="flex-grow-1">
+            <h6 class="mb-10">Contact us</h6>
+            <p class="text-sm mb-50">
+                Contact information for Super-duper
+            </p>
+        </div>
+    </div>
+    <div id="a2">
+        <div class="row mb-20"><b>Email</b><p>super@duper.com</p></div>
+        <div class="row mb-20"><b>Cellphone</b><p>+52 449 386-27-37</p></div>
+        <div class="row mb-20"><b>Address</b><p>Colosio #512, CDMX.</p></div>
+    </div>
 
-<h1 class="text-center" >
-    <span id="a1">CONTACT US...</span>
-    <!-- <ng-container *ngIf="validarSpeak.band"> -->
-        <!-- <button (click)="playSpeak('a1')" class="btn btn-dark btn-circle btn-md" style="background-color: blue; border: none; margin-left: 15px;" >P</button> 
-        <button (click)="stopSpeak()" class="btn btn-dark btn-circle btn-md"  style="background-color: red; border: none;"><i class="far fa-stop-circle" style="color:rgb(42, 104, 180)"></i> S</button> -->
-    <!-- </ng-container> -->
-</h1><br><br>
-
-<h5 id="a2" class="h5 text-center" ><br><br>Email: super@duper.com <br><br>
-    <div class="spacer"></div>
-   <div class="spacer"></div>
-    Celphone: 55 548 46 895<br><br>
-<div class="spacer"></div>
-    Address: Colosio #512, CDMX.<br><br>
-</h5>
-    
-<h5  class="text-center"><br><br><br><br><br><br>
-    <span id="a3" style="text-align: center;"><b>SuperDuper 2022 | within reach of your life </b>  All Rights Reserved.</span>
-    <!-- <ng-container *ngIf="validarSpeak.band"> -->
-        <button (click)="playSpeak2('a1','a2','a3')" class="btn btn-dark btn-circle btn-md" style="background-color: blue; border: none; margin-left: 15px;" >P</button> 
-        <button (click)="stopSpeak()" class="btn btn-dark btn-circle btn-md"  style="background-color: red; border: none;"><i class="far fa-stop-circle" style="color:rgb(42, 104, 180)"></i> S</button>
-    <!-- </ng-container> -->
-</h5>
+    <h5 class="mt-50">
+        <div id="a3" class="text-center">
+            Super-duper 2022 | Within reach of your life.
+        </div>
+        <div class="text-center">
+            All Rights Reserved.
+        </div>
+        <h5 class="text-center mt-30 mb-20">SCREEN READER</h5>
+        <div class="flex text-center">
+            <button (click)="playSpeak2('a1','a2','a3')" class="main-btn active-btn rounded-md btn-hover"><i
+                    class="bi bi-play"></i> Play</button>
+            <button (click)="stopSpeak()" class="ml-20 main-btn danger-btn rounded-md btn-hover"><i class="bi bi-stop"></i>
+                Stop</button>
+        </div>
+    </h5>
+</div>

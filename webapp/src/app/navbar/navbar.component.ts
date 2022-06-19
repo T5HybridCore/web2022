@@ -28,6 +28,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   // Form
   form: FormGroup;
 
+  // Show
+  loggedIn: boolean = false;
+
   // Constructor
   constructor(@Optional() private auth: Auth, private apiService: ApiService, private router: Router) {
     if (auth) {
@@ -38,6 +41,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         map(u => !!u)
       ).subscribe(isLoggedIn => {        
         if (isLoggedIn) {
+          this.loggedIn = isLoggedIn;
           apiService.getCustomer(auth.currentUser?.uid ?? '').subscribe(async (user: any) => {
             if (user.customClaims && user.customClaims['admin']) {
               await this.wrongData.fire();

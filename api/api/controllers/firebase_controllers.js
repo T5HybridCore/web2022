@@ -2,6 +2,45 @@ const express = require('express');
 const url = require('url');
 const router = express.Router();
 const firebaseModel = require('../models/firebase_model');
+const nodeMailer = require('nodemailer');
+
+// Send question
+router.post('/question', async (req, res, next) => {
+    try {
+        let transporter = nodeMailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+            auth: {
+                user: 'superduperstore2022@gmail.com',
+                pass: 'Super.duper_2022'
+            }
+        });
+
+        let mailOptions = {
+            from: `"${req.body['name']}" <${req.body['contactEmail']}>`, // sender address
+            to: 'superduperstore2022@gmail.com', // list of receivers
+            subject: 'Super-duper question!', // Subject line
+            text: req.body['question'], // plain text body
+            html: '<b>Super-duper Support</b>' // html body
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log(error);
+                //return res.sendStatus(409);
+            } else {
+                console.log('Message %s sent: %s', info.messageId, info.response);
+            return res.status(201).json(info);
+            }
+        });
+
+        return res.sendStatus(409);
+    }
+    catch (e) {
+        return next(e);
+    }
+});
 
 // Get cart
 router.get('/cart/:id', async (req, res, next) => {
