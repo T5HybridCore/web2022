@@ -1,76 +1,53 @@
-import { Component, OnDestroy, OnInit, Optional, ViewChild } from '@angular/core';
-import { Auth, authState, User, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
-import { traceUntilFirst } from '@angular/fire/performance';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
-import { EMPTY, map, Observable, Subscription } from 'rxjs';
-import { ApiService } from '../shared/services/api.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-faq',
   templateUrl: './faq.component.html',
-  styleUrls: ['./faq.component.css'],
+  styleUrls: ['./faq.component.css']
 })
 export class FaqComponent implements OnInit {
-  // View
-  @ViewChild('wrongData')
-  public readonly wrongData!: SwalComponent;
 
-    // Attributes
-    private readonly userDisposable: Subscription | undefined;
-    public readonly user: Observable<User | null> = EMPTY;
+  mensaje: any;
+  oracion: any;
 
-  form: FormGroup;
-
-  
-constructor( @Optional() private auth: Auth, private apiService: ApiService, private router: Router) {
-  if (auth) {
-    this.user = authState(this.auth);
-
-    this.userDisposable = authState(this.auth).pipe(
-      traceUntilFirst('auth'),
-      map(u => !!u)
-    ).subscribe(isLoggedIn => {        
-      if (isLoggedIn) {
-        apiService.getCustomer(auth.currentUser?.uid ?? '').subscribe(async (user: any) => {
-          if (user.customClaims && user.customClaims['admin']) {
-            await this.wrongData.fire();
-            await signOut(this.auth);
-          }
-        });
-        //router.navigate(['/admin']);
-      }
-    });
+  constructor() {  if ('speechSynthesis' in window) {
+    this.mensaje = new SpeechSynthesisUtterance();
+  } else {
+    alert("Lo siento, tu navegador no soporta esta tecnología");
   }
-
-      // Form
-      this.form = new FormGroup({
-        'email': new FormControl('', Validators.required),
-        'password': new FormControl('', Validators.required),
-        'question': new FormControl('', Validators.required)
-      });
+  // this.validarSpeak = global;
+  // console.log(this.validarSpeak);
 }
 
-    ngOnInit() {
-     
-    }
- 
 
-    async question() {
+ngOnInit(): void {
+}
 
-      //aqui va la funcion que manda el mensaje por nodejs al email del sitio
-      /*await sendquestion(this.auth, this.form.value['question'], this.form.value['email'], this.form.value['password'])
-        .then((user) => {
-          
-        })
-        .catch(async (error) => {
-          await this.wrongData.fire();        
-        }); 
-        
-        */
-    }
+playSpeak(a1:string) {  
+  this.oracion = document.getElementById(a1)!.innerHTML;
+  this.mensaje.text= this.oracion; 
+  if(speechSynthesis.paused){
+    speechSynthesis.resume();
+  }else{
+    speechSynthesis.cancel();
+    speechSynthesis.speak(this.mensaje);
+  }
+}
 
+stopSpeak(){
+  speechSynthesis.pause();
+}
 
+playSpeak2(a1:string,a2:string,a3:string) {
+
+  this.oracion = document.getElementById(a1)!.innerHTML + "."+document.getElementById(a2)!.innerHTML +". " + document.getElementById(a3)!.innerHTML;
+  this.mensaje.text= this.oracion; 
+  if(speechSynthesis.paused){
+    speechSynthesis.resume();
+  }else{
+    speechSynthesis.cancel();
+    speechSynthesis.speak(this.mensaje);
+  }
+}
 
 }

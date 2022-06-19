@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 
 import { FormControl, FormGroup, Validators, ReactiveFormsModule,FormBuilder,   ValidatorFn, AbstractControl, ValidationErrors,  } from '@angular/forms';
 
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+/* import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap'; */
 import { NgModule } from '@angular/core';
 
 
