@@ -39,6 +39,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { LoginComponent } from './login/login.component';
 import { CustomerordersComponent } from './customerorders/customerorders.component';
 import { JoinPipe } from './shared/join.pipe';
+import { QuestionComponent } from './question/question.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { JoinPipe } from './shared/join.pipe';
     GraphComponent,
     LoginComponent,
     CustomerordersComponent,
+    QuestionComponent,
     JoinPipe
   ],
   imports: [
