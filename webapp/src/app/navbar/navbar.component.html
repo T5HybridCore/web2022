@@ -2,29 +2,30 @@
     <!--  style=" background-color: #e3f2fd; " -->
     <div class="container-fluid ">
         <a class="navbar-brand d-none d-lg-block " href="#" [routerLink]="['/home']">
-            <img src="https://i.ibb.co/XLYbGNT/logo.png" alt="logo" width="35" height="42" class="d-inline-block align-text-top">
+            <img src="https://i.ibb.co/XLYbGNT/logo.png" alt="logo" width="35" height="42"
+                class="d-inline-block align-text-top">
             <p style="display:inline" class="titulo">Super-Duper</p>
         </a>
         <a class="navbar-brand d-lg-none" href="#" [routerLink]="['/home']">
-            <img src="https://i.ibb.co/XLYbGNT/logo.png" alt="logo" width="30" height="35.27" class="d-inline-block align-text-top">
-
+            <img src="https://i.ibb.co/XLYbGNT/logo.png" alt="logo" width="30" height="35.27"
+                class="d-inline-block align-text-top">
         </a>
 
-
-        <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation ">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation ">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse order-3 order-lg-2" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Account
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Account
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <!-- Menu que cambiara segun privilegios -->
                         <li>
-                            <!-- <a class="dropdown-item btn" href="#" [routerLink]="['/login']">Log in</a>< -->
-                            <a class="nav-link dropdown-item" style="color: #000; font-weight: bold" (click)="openLoginForm()" data-toggle="modal" data-target="#ModalForm">Login</a>
+                            <a class="nav-link dropdown-item" style="color: #000; font-weight: bold"
+                                (click)="openModal()">Login</a>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
@@ -44,8 +45,9 @@
                     <a class="nav-link disabled ">Disabled</a>
                 </li> -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Departments
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Departments
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="#" [routerLink]="['/fruits']">Fruits</a></li>
@@ -74,22 +76,18 @@
     <div class="fab shadow ">
         <div class="fab-content">
             <img src="https://i.ibb.co/frB59Nj/help.png" alt="" width="60">
-
         </div>
     </div>
     <div class="sub-button shadow">
         <a href="#" [routerLink]="['/faq']">
-            <img src="https://i.ibb.co/zSbvP2p/faq.png " alt=" " width="45 ">
-
+            <img src="https://i.ibb.co/zSbvP2p/faq.png" alt="" width="45">
         </a>
     </div>
     <div class="sub-button shadow ">
         <a href="#" [routerLink]="['/contact']">
-            <img src="https://i.ibb.co/6HtfRgJ/contact.png " alt=" " width="40 ">
-
+            <img src="https://i.ibb.co/6HtfRgJ/contact.png" alt="" width="40">
         </a>
     </div>
-
 </div>
 
 <!-- Boton flotante admin-->
@@ -102,43 +100,76 @@
     </div>
     <div class="sub-button2 shadow ">
         <a href="#" [routerLink]="['/admin/reports']">
-            <img src="https://i.ibb.co/Ytszyxb/output-onlinepngtools-4.png" alt=" " width="40 ">
+            <img src="https://i.ibb.co/Ytszyxb/output-onlinepngtools-4.png" alt="" width="40">
             <!--   <span class="material-icons ">mail_outline</span> -->
         </a>
     </div>
     <div class="sub-button2 shadow ">
         <a href="#" [routerLink]="['/admin']">
-            <img src="https://i.ibb.co/d6ytLZr/update.png" alt=" " width="40 ">
+            <img src="https://i.ibb.co/d6ytLZr/update.png" alt="" width="40">
             <!--   <span class="material-icons ">mail_outline</span> -->
         </a>
     </div>
-
-
-
-
 </div>
 
-<div class="modal fade " id="ModalForm" tabindex="-1" aria-labelledby="ModalFormLabel" aria-hidden="true">
+<div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="signInModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content card-style">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signInModalTitle">Sign In</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
             <div class="modal-body">
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                <div class="myform bg-dark">
-                    <h1 class="text-center" style="color:white">Login Form</h1>
-                    <form>
-                        <div class="mb-3 mt-4">
-                            <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <form [formGroup]="form" (ngSubmit)="login()" class="needs-validation" novalidate>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="input-style-1">
+                                <label>Email</label>
+                                <input type="email" placeholder="email..." formControlName="email"
+                                    [ngClass]="{'is-invalid':!form.get('email')?.valid}">
+                                <div *ngIf="form.controls['email'].errors?.['required']" class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['email'].errors?.['email']" class="invalid-feedback">
+                                    * Invalid email
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="input-style-1">
+                                <label>Password</label>
+                                <input type="password" placeholder="password..." formControlName="password"
+                                    [ngClass]="{'is-invalid':!form.get('password')?.valid}">
+                                <div *ngIf="form.controls['password'].errors?.['required']" class="invalid-feedback">
+                                    * Field required
+                                </div>
+                                <div *ngIf="form.controls['password'].errors?.['minlength']" class="invalid-feedback">
+                                    * At least 8 characters
+                                </div>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-light mt-3">LOGIN</button>
-                        <p>Not a member? <a href="#">Signup now</a></p>
-                    </form>
+                    </div>
+                    <div class="col-12">
+                        <div class="button-group d-flex justify-content-center flex-wrap">
+                            <button type="submit" class="main-btn primary-btn btn-hover w-100 text-center"
+                                [disabled]="form.invalid">
+                                Sign In
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <div class="singin-option pt-40">
+                    <p class="text-sm text-medium text-dark text-center">
+                        Don’t have any account yet?
+                        <a [routerLink]="'/signup'">Sign up</a>
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<swal #wrongData title="Sign in failed" text="Wrong email or password. Try again" icon="error"></swal>
