@@ -41,7 +41,7 @@ export class MycartComponent implements OnInit {
   getProduct(id: string) {
 
     console.log("dentro get CART");
-    this.loadingCart = true;
+    this.loadingCart = false;
 
     //se obtienen los datos del carrito seleccionado
     this.api.getProduct(id).subscribe(product => {
