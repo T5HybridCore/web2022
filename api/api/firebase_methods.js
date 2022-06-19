@@ -34,6 +34,12 @@ class FirebaseMethods {
         return list.length ? list : null;
     }
 
+    // Get customer
+    async getCustomer(uid) {
+        const result = await this.auth.getUser(uid);
+        return result ? result : null;
+    }
+
     // Add customer
     async addCustomer(customer) {
         const result = await this.auth.createUser(customer);

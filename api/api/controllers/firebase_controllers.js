@@ -14,6 +14,18 @@ router.get('/customer', async (req, res, next) => {
     }
 });
 
+// Get one customer
+router.get('/customer/:id', async (req, res, next) => {
+    try {
+        const result = await firebaseModel.getCustomer(req.params.id);
+        if (!result) return res.sendStatus(404);
+        return res.json(result);
+    }
+    catch (e) {
+        return next(e);
+    }
+});
+
 // Add a new customer
 router.post('/customer', async (req, res, next) => {
     try {

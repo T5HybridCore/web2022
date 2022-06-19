@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit, Optional, ViewChild } from '@angular/core';
-import { Auth, authState, User, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, authState, User, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { traceUntilFirst } from '@angular/fire/performance';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { EMPTY, map, Observable, Subscription } from 'rxjs';
+import { ApiService } from '../shared/services/api.service';
 declare var window: any;
 
 @Component({
@@ -28,15 +29,23 @@ export class NavbarComponent implements OnInit, OnDestroy {
   form: FormGroup;
 
   // Constructor
-  constructor(@Optional() private auth: Auth, private router: Router) {
+  constructor(@Optional() private auth: Auth, private apiService: ApiService, private router: Router) {
     if (auth) {
       this.user = authState(this.auth);
 
       this.userDisposable = authState(this.auth).pipe(
         traceUntilFirst('auth'),
         map(u => !!u)
-      ).subscribe(isLoggedIn => {
-        if (isLoggedIn) router.navigate(['/admin']);
+      ).subscribe(isLoggedIn => {        
+        if (isLoggedIn) {
+          apiService.getCustomer(auth.currentUser?.uid ?? '').subscribe(async (user: any) => {
+            if (user.customClaims && user.customClaims['admin']) {
+              await this.wrongData.fire();
+              await signOut(this.auth);
+            }
+          });
+          //router.navigate(['/admin']);
+        }
       });
     }
     
@@ -67,11 +76,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
   async login() {
     await signInWithEmailAndPassword(this.auth, this.form.value['email'], this.form.value['password'])
       .then((user) => {
-        //this.router.navigate(['/admin']);
         this.modal.hide();
       })
       .catch(async (error) => {
         await this.wrongData.fire();        
       });
+  }
+
+  async logout() {
+    await signOut(this.auth);
+    this.router.navigate(['/home']);
   }
 }

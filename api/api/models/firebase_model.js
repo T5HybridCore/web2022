@@ -20,6 +20,7 @@ class FirebaseModel {
 
     // Customers
     getCustomers() { return firebase_methods.getCustomers(); }
+    getCustomer(uid) { return firebase_methods.getCustomer(uid); }
     addCustomer(customer) { return firebase_methods.addCustomer(customer); }
     updateCustomer(uid, customer) { return firebase_methods.updateCustomer(uid, customer); }
     deleteCustomer(uid) { return firebase_methods.deleteCustomer(uid); }
