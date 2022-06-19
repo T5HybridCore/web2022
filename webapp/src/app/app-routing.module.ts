@@ -17,6 +17,7 @@ import { OrdersComponent } from './admin/orders/orders.component';
 import { ReportsComponent } from './admin/reports/reports.component';
 import { UsersComponent } from './admin/users/users.component';
 import { SigninComponent } from './admin/signin/signin.component';
+import { QuestionComponent } from './question/question.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
 {path: 'contact', component: ContactComponent},
 {path: 'signup', component: SignupComponent},
 {path: 'faq', component: FaqComponent},
+{path: 'question', component: QuestionComponent},
 
 
 {path: 'product:id', component: VerUnProductoComponent},
