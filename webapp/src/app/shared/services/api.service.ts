@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class ApiService {
 
   // Attributes
-  url = 'http://localhost:5050/api/';
+  url = 'https://superduperstore2022.herokuapp.com/api/';
 
   constructor(private httpClient: HttpClient) {
     console.log('API Service is ready');
