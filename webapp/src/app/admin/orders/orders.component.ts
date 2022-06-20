@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { ApiService } from 'src/app/shared/services/api.service';
 declare var window: any;
@@ -24,13 +24,13 @@ export class OrdersComponent implements OnInit {
 
   // Modal & form
   modal: any;
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   // Constructor
   constructor(private apiService: ApiService) {
-    this.form = new FormGroup({
-      'id': new FormControl(''),
-      'status': new FormControl('', Validators.required)
+    this.form = new UntypedFormGroup({
+      'id': new UntypedFormControl(''),
+      'status': new UntypedFormControl('', Validators.required)
     });
   }
 

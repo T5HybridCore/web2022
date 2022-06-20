@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { ApiService } from 'src/app/shared/services/api.service';
 declare var window: any;
@@ -25,17 +25,17 @@ export class CustomersComponent implements OnInit {
 
   // Modal & form
   modal: any;
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   constructor(private apiService: ApiService) {
-    this.form = new FormGroup({
-      'uid': new FormControl('', [Validators.required]),
-      'email': new FormControl('', [Validators.required, Validators.email]),
-      'phoneNumber': new FormControl('', [Validators.required, Validators.pattern("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$"), Validators.minLength(10), Validators.maxLength(10)]),
-      'password': new FormControl('', Validators.minLength(8)),
-      'displayName': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'photoURL': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'disabled': new FormControl('', [Validators.required])
+    this.form = new UntypedFormGroup({
+      'uid': new UntypedFormControl('', [Validators.required]),
+      'email': new UntypedFormControl('', [Validators.required, Validators.email]),
+      'phoneNumber': new UntypedFormControl('', [Validators.required, Validators.pattern("^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$"), Validators.minLength(10), Validators.maxLength(10)]),
+      'password': new UntypedFormControl('', Validators.minLength(8)),
+      'displayName': new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
+      'photoURL': new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
+      'disabled': new UntypedFormControl('', [Validators.required])
     });
   }
 

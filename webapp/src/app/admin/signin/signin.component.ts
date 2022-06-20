@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, Optional, ViewChild } from '@angular/core';
 import { Auth, authState, User, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { traceUntilFirst } from '@angular/fire/performance';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { EMPTY, map, Observable, Subscription } from 'rxjs';
@@ -24,7 +24,7 @@ export class SigninComponent implements OnInit, OnDestroy {
   public readonly user: Observable<User | null> = EMPTY;
 
   // Form
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   constructor(@Optional() private auth: Auth, private router: Router) {
     if (auth) {
@@ -39,9 +39,9 @@ export class SigninComponent implements OnInit, OnDestroy {
     }
 
     // Form
-    this.form = new FormGroup({
-      'email': new FormControl('', Validators.required),
-      'password': new FormControl('', Validators.required)
+    this.form = new UntypedFormGroup({
+      'email': new UntypedFormControl('', Validators.required),
+      'password': new UntypedFormControl('', Validators.required)
     });
   }
 

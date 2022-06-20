@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { ApiService } from '../shared/services/api.service';
@@ -15,14 +15,14 @@ export class QuestionComponent implements OnInit {
   public readonly emailSent!: SwalComponent;
 
   // Form
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   constructor(private apiService: ApiService, private router: Router) {
     // Form
-    this.form = new FormGroup({
-      'email': new FormControl('', [Validators.required, Validators.email]),
-      'name': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'question': new FormControl('', [Validators.required, Validators.minLength(10)])
+    this.form = new UntypedFormGroup({
+      'email': new UntypedFormControl('', [Validators.required, Validators.email]),
+      'name': new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
+      'question': new UntypedFormControl('', [Validators.required, Validators.minLength(10)])
     });
   }
 

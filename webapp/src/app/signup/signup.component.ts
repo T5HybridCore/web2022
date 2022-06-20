@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, ValidatorFn, AbstractControl, ValidationErrors, } from '@angular/forms';
+import { FormBuilder, UntypedFormGroup, Validators, UntypedFormControl, ValidatorFn, AbstractControl, ValidationErrors, } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../shared/services/api.service';
 
@@ -11,17 +11,17 @@ import { ApiService } from '../shared/services/api.service';
 export class SignupComponent implements OnInit {
 
   // Form
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   constructor(private apiService: ApiService, private router: Router) {
     // Form
-    this.form = new FormGroup({
-      'displayName': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'email': new FormControl('', [Validators.required, Validators.email]),
-      'password': new FormControl('', [Validators.required, Validators.minLength(8)]),
-      'confirmPassword': new FormControl('', [Validators.required, Validators.minLength(8)]),
-      'address': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'city': new FormControl('', [Validators.required, Validators.minLength(3)]),
+    this.form = new UntypedFormGroup({
+      'displayName': new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
+      'email': new UntypedFormControl('', [Validators.required, Validators.email]),
+      'password': new UntypedFormControl('', [Validators.required, Validators.minLength(8)]),
+      'confirmPassword': new UntypedFormControl('', [Validators.required, Validators.minLength(8)]),
+      'address': new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
+      'city': new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
     }, {
       validators: this.mustMatch
     });

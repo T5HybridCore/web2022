@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { ApiService } from 'src/app/shared/services/api.service';
 declare var window: any;
@@ -28,22 +28,22 @@ export class ProductsComponent implements OnInit {
   // Modal & form
   modal: any;
   modalPreview: any;
-  form: FormGroup;
+  form: UntypedFormGroup;
 
   // Constructor
   constructor(private apiService: ApiService) {
-    this.form = new FormGroup({
-      'id': new FormControl('', [Validators.required]),
-      'title': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'category': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'subCategory': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'manufacturer': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'contents': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'price': new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0.01)]),
-      'stock': new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(1)]),
-      'organic': new FormControl('', [Validators.required]),
-      'picture': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'description': new FormControl('', [Validators.required, Validators.minLength(3)]),
+    this.form = new UntypedFormGroup({
+      'id': new UntypedFormControl('', [Validators.required]),
+      'title': new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
+      'category': new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
+      'subCategory': new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
+      'manufacturer': new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
+      'contents': new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
+      'price': new UntypedFormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(0.01)]),
+      'stock': new UntypedFormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.min(1)]),
+      'organic': new UntypedFormControl('', [Validators.required]),
+      'picture': new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
+      'description': new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
     });
   }
 
